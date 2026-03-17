@@ -333,41 +333,7 @@ footer p{
     100%{ transform:translate(-50%,0); }
 }
 
-/* RESPONSIVE DESIGN */
 
-/* Tablet */
-@media (max-width: 900px){
-    .collection-grid{
-        grid-template-columns: repeat(2,1fr);
-    }
-}
-
-
-/* Mobile */
-@media (max-width: 600px){
-    .collection-grid{
-        grid-template-columns: 1fr;
-    }
-
-.navbar{
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-}
-
-nav{
-    position:static;
-    transform:none;
-    display:flex;
-    gap:15px;
-}
-
-.search-bar{
-    width:100%;
-    max-width:300px;
-}
-
-}
 
 @media (max-width: 600px){
 
@@ -496,6 +462,42 @@ nav{
 .products,
 .collections{
     padding:20px;
+}
+
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Tablet */
+@media (max-width: 900px){
+    .collection-grid{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+
+/* Mobile */
+@media (max-width: 600px){
+    .collection-grid{
+        grid-template-columns: 1fr;
+    }
+
+.navbar{
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+}
+
+nav{
+    position:static;
+    transform:none;
+    display:flex;
+    gap:15px;
+}
+
+.search-bar{
+    width:100%;
+    max-width:300px;
 }
 
 }
