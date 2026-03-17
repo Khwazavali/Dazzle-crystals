@@ -472,3 +472,31 @@ nav{
     margin-top:5px;
     color:rgba(255,255,255,0.9);
 }
+
+
+/* FORCE MOBILE FIX */
+@media (max-width: 600px){
+
+/* COLLECTION FIX */
+.collection-grid{
+    grid-template-columns: 1fr !important;
+}
+
+/* PRODUCT FIX */
+.product-grid{
+    grid-template-columns: 1fr !important;
+}
+
+/* NAVBAR FIX */
+nav{
+    position:static;
+    transform:none;
+}
+
+/* SPACING FIX */
+.products,
+.collections{
+    padding:20px;
+}
+
+}
