@@ -22,9 +22,16 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <div class="search-bar">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" placeholder="Search crystals...">
+    <div class="nav-right">
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search crystals...">
+        </div>
+
+        <a href="cart.html" class="cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count">0</span>
+        </a>
     </div>
 
 </header>
@@ -101,21 +108,36 @@
             <img src="images/crystalbowl.webp" alt="Crystal Bowl">
             <h3>Crystal Bowl</h3>
             <p>$40</p>
-            <button>Add to Cart</button>
+            <button 
+            data-name="Crystal Bowl" 
+            data-price="40" 
+            data-image="images/crystalbowl.webp">
+            Add to Cart
+            </button>
         </div>
 
         <div class="product-card">
             <img src="images/quartzstatue.webp" alt="Quartz Statue">
             <h3>Quartz Statue</h3>
             <p>$55</p>
-            <button>Add to Cart</button>
+            <button 
+            data-name="Quartz Statue" 
+            data-price="55" 
+            data-image="images/quartzstatue.webp">
+            Add to Cart
+            </button>
         </div>
 
         <div class="product-card">
            <img src="images/crystallamp.webp" alt="Crystal Lamp">
             <h3>Crystal Lamp</h3>
             <p>$70</p>
-            <button>Add to Cart</button>
+            <button 
+            data-name="Crystal Lamp" 
+            data-price="70" 
+            data-image="images/crystallamp.webp">
+            Add to Cart
+            </button>
         </div>
 
     </div>
