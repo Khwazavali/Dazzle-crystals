@@ -14,19 +14,23 @@ document.addEventListener("DOMContentLoaded", function () {
         div.classList.add("product-card");
 
         div.innerHTML = `
-            <div class="cart-item-content">
-                <img src="${item.image}" alt="${item.name}">
+        <div class="cart-item-content">
 
-                <div class="cart-item-info">
-                    <h3>${item.name}</h3>
-                    <p>$${item.price}</p>
+            <img src="${item.image}" alt="${item.name}">
 
-                    <button class="remove-btn" onclick="removeItem(${index})">
-                        Remove
-                    </button>
-                </div>
+            <div class="cart-item-info">
+                <a href="${item.link}" class="cart-title">${item.name}</a>
+                <p class="cart-price">$${item.price}</p>
             </div>
-        `;
+
+            <div class="cart-delete">
+                <button onclick="removeItem(${index})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+
+        </div>
+`;
 
         cartContainer.appendChild(div);
 

@@ -19,11 +19,13 @@ buttons.forEach(button => {
         const price = button.getAttribute("data-price");
 
         const image = button.getAttribute("data-image");
+        const link = button.getAttribute("data-link");
 
         const item = {
             name: name,
             price: price,
-            image: image
+            image: image,
+            link: link
         };
 
         cart.push(item);
