@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartCount = document.getElementById("cart-count");
+    cartCount.textContent = cart.length;
 
     const cartContainer = document.getElementById("cart-items");
     const totalDisplay = document.getElementById("total");
@@ -45,7 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function removeItem(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     cart.splice(index, 1);
+
     localStorage.setItem("cart", JSON.stringify(cart));
+
+    const cartCount = document.getElementById("cart-count");
+    cartCount.textContent = cart.length;
+
     location.reload();
 }
