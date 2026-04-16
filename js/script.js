@@ -97,7 +97,7 @@ function filterProducts() {
 
         const category = product.getAttribute("data-collection");
         const price = parseInt(
-            product.querySelector("p").textContent.replace("$", "")
+            product.querySelector(".price").textContent.replace("$", "")
         );
 
         let matchCollection = false;
@@ -163,14 +163,14 @@ function sortProducts() {
 
     if (value === "low-high") {
         sortedItems = items.sort((a, b) => {
-            return a.querySelector("p").textContent.replace("$", "") - 
-                   b.querySelector("p").textContent.replace("$", "");
+            return a.querySelector(".price").textContent.replace("$", "") - 
+                   b.querySelector(".price").textContent.replace("$", "");
         });
     } 
     else if (value === "high-low") {
         sortedItems = items.sort((a, b) => {
-            return b.querySelector("p").textContent.replace("$", "") - 
-                   a.querySelector("p").textContent.replace("$", "");
+            return b.querySelector(".price").textContent.replace("$", "") - 
+                   a.querySelector(".price").textContent.replace("$", "");
         });
     } 
     else {

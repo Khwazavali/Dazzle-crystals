@@ -206,7 +206,7 @@ nav {
 
 .products {
     padding: 20px 40px 80px;
-    background: #f7f7f7;
+    background: #e6e6e6;
 }
 
 .products h2 {
@@ -227,7 +227,7 @@ nav {
     top: 50%;
     width: 120px;
     height: 1px;
-    background: #dcdcdc;
+    background: #bdbdbd;
 }
 
 .products h2::before {
@@ -245,16 +245,25 @@ nav {
     grid-template-columns: repeat(4, 1fr);
     gap: 35px;
     margin-top: 20px;
+    align-items: start;
 }
 
 .product-card {
-    padding: 25px;
-    text-align: center;
+    padding: 13px;
+    text-align: left;
     background: white;
     border-radius: 14px;
-    border: 1px solid #ececec;
+    border: 1px solid #e0e0e0;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
     transition: 0.3s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.product-card * {
+    margin-bottom: 0;
 }
 
 .product-card:hover {
@@ -263,26 +272,28 @@ nav {
 }
 
 .product-card img {
+    display: block;
     width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
+    height: 220px;
+    object-fit: contain;
+    padding: 0;
+    margin-bottom: 10px;
 }
 
 .product-card h3 {
     font-size: 18px;
-    margin-top: 15px;
-    margin-bottom: 6px;
     font-weight: 600;
+    margin: 6px 0 4px;
 }
 
-.product-card p {
-    font-size: 15px;
-    color: #444;
+.product-card p:last-of-type {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
 .product-card button {
-    margin-top: 15px;
+    margin-top: 8px;
     padding: 10px 20px;
     background: black;
     color: white;
@@ -290,14 +301,30 @@ nav {
     cursor: pointer;
     font-weight: bold;
     border-radius: 6px;
-    display: inline-block;
-    width: auto;
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0;
 }
 
 .product-card button:hover {
     background: #444;
 }
 
+.product-desc {
+    font-size: 15px;
+    color: #8a8a8a;
+    margin-bottom: 8px;
+
+    height: 34px;          /* FIXED HEIGHT */
+    line-height: 17px;     /* clean spacing */
+    overflow: hidden;
+}
+
+.price {
+    color: #9d9122;
+    font-weight: 700;
+}
 /* ==================== COLLECTIONS ==================== */
 
 .collections {
@@ -449,6 +476,7 @@ footer p {
     display: flex;
     gap: 40px;
     padding: 40px 80px;
+    background: #e6e6e6;
 }
 
 .cart-left {
