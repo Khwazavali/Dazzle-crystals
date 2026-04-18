@@ -8,6 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalDisplay = document.getElementById("total");
     const subtotalDisplay = document.getElementById("subtotal");
 
+    // ✅ SHOW MESSAGE IF CART IS EMPTY
+    if (cart.length === 0) {
+        cartContainer.innerHTML = `
+            <div class="empty-cart">
+                <i class="fa-solid fa-cart-shopping empty-icon"></i>
+                <h3>Your cart is empty</h3>
+                <p>Looks like you haven’t added any crystals yet ✨</p>
+                <a href="index.html#collections" class="shop-btn">Shop Now</a>
+            </div>
+        `;
+        subtotalDisplay.textContent = "Subtotal: $0.00";
+        totalDisplay.textContent = "Total: $0.00";
+        return;
+    }
+
     let total = 0;
 
     cart.forEach((item, index) => {
@@ -36,11 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cartContainer.appendChild(div);
 
-        total += parseInt(item.price);
+        total += Number(item.price);
     });
 
-    subtotalDisplay.textContent = "Subtotal: $" + total;
-    totalDisplay.textContent = "Total: $" + total;
+    subtotalDisplay.textContent = "Subtotal: $" + total.toFixed(2);
+    totalDisplay.textContent = "Total: $" + total.toFixed(2);
 
 });
 

@@ -40,6 +40,17 @@ buttons.forEach(button => {
         localStorage.setItem("cart", JSON.stringify(cart));
 
         updateCartCount();
+
+        const message = document.getElementById("cart-message");
+
+        if (message) {
+            message.textContent = item.name + " added to cart 🛒";
+            message.classList.add("show");
+
+            setTimeout(() => {
+                message.classList.remove("show");
+            }, 2000);
+        }
     });
 });
 

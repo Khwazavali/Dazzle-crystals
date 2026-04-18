@@ -617,7 +617,7 @@ footer p {
 }
 
 .cart-delete button:hover {
-    background: black;
+    background: rgb(190, 47, 47);
     border-color: black;
 }
 
@@ -745,4 +745,61 @@ footer p {
 
 .clear-btn:hover {
     background: #444;
+}
+
+/* ================= EMPTY CART ================= */
+
+.empty-cart {
+    text-align: center;
+    margin-top: 80px;
+    padding: 40px;
+}
+
+.empty-icon {
+    font-size: 60px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.empty-cart h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.empty-cart p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.empty-cart .shop-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* ================= CART TOAST ================= */
+
+.cart-message {
+    position: fixed;
+    top: 90px;
+    right: 40px;
+    background: black;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.cart-message.show {
+    opacity: 1;
+    transform: translateY(0);
 }
