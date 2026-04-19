@@ -1,0 +1,65 @@
+[
+  {
+    "id": "crystal-bowl",
+    "name": "Crystal Bowl",
+    "price": 40,
+    "image": "images/crystalbowl.webp",
+    "stock": 1,
+    "collection": "garden",
+    "featured": true
+  },
+  {
+    "id": "quartz-statue",
+    "name": "Quartz Statue",
+    "price": 55,
+    "image": "images/quartzstatue.webp",
+    "stock": 1,
+    "collection": "celestial",
+    "featured": true
+  },
+  {
+    "id": "crystal-lamp",
+    "name": "Crystal Lamp",
+    "price": 70,
+    "image": "images/crystallamp.webp",
+    "stock": 1,
+    "collection": "fantasy",
+    "featured": true
+  },
+  {
+    "id": "crystal-lion",
+    "name": "Crystal Lion",
+    "price": 65,
+    "image": "images/lion.webp",
+    "stock": 1,
+    "collection": "wildlife",
+    "featured": true
+  },
+  {
+    "id": "crystal-elephant",
+    "name": "Crystal Elephant",
+    "price": 75,
+    "image": "images/elephant.webp",
+    "stock": 1,
+    "collection": "wildlife",
+    "featured": false
+  },
+  {
+    "id": "crystal-owl",
+    "name": "Crystal Owl",
+    "price": 50,
+    "image": "images/owl.webp",
+    "stock": 1,
+    "collection": "wildlife",
+    "featured": false
+  },
+  {
+    "id": "crystal-deer",
+    "name": "Crystal Deer",
+    "price": 60,
+    "image": "images/deer.jpg",
+    "stock": 1,
+    "collection": "wildlife",
+    "featured": false
+  }
+]

@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function () {
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const cartDisplay = document.getElementById("cart-count");
@@ -11,53 +13,18 @@ const selectedCollection = params.get("collection");
 
 // Update count
 function updateCartCount() {
-    cartDisplay.textContent = cart.length;
+    if (cartDisplay) {
+        cartDisplay.textContent = cart.length;
+    }
 }
 
 updateCartCount();
 
 // Select buttons
-const buttons = document.querySelectorAll(".product-card button");
-
-buttons.forEach(button => {
-    button.addEventListener("click", () => {
-
-        const name = button.getAttribute("data-name");
-        const price = button.getAttribute("data-price");
-
-        const image = button.getAttribute("data-image");
-        const link = button.getAttribute("data-link");
-
-        const item = {
-            name: name,
-            price: price,
-            image: image,
-            link: link
-        };
-
-        cart.push(item);
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        updateCartCount();
-
-        const message = document.getElementById("cart-message");
-
-        if (message) {
-            message.textContent = item.name + " added to cart 🛒";
-            message.classList.add("show");
-
-            setTimeout(() => {
-                message.classList.remove("show");
-            }, 2000);
-        }
-    });
-});
 
 // COLLECTION FILTER LOGIC
 
 const checkboxes = document.querySelectorAll(".collection-filter");
-const products = document.querySelectorAll(".product-card");
 
 checkboxes.forEach(cb => {
     cb.addEventListener("change", filterProducts);
@@ -104,10 +71,12 @@ function filterProducts() {
         }
     });
 
+    
+    const products = document.querySelectorAll(".product-card");
     products.forEach(product => {
 
         const category = product.getAttribute("data-collection");
-        const price = parseInt(
+        const price = Number(
             product.querySelector(".price").textContent.replace("$", "")
         );
 
@@ -143,7 +112,10 @@ function filterProducts() {
         }
 
         // FINAL DECISION
-        if (show && (selectedCollections.length > 0 || selectedPrices.length > 0)) {
+        if (selectedCollections.length === 0 && selectedPrices.length === 0) {
+            product.style.display = "block";
+            visibleCount++;
+        } else if (show) {
             product.style.display = "block";
             visibleCount++;
         } else {
@@ -151,19 +123,25 @@ function filterProducts() {
         }
     });
 
+    if (resultCount) {
     resultCount.textContent = visibleCount + " Results";
+    }
 
+    if (noResults) {
     if (visibleCount === 0) {
-        noResults.textContent = "No crystals match your filters. Try adjusting your selection ✨";
+        noResults.textContent = "No crystals match your filters ✨";
         noResults.style.display = "block";
     } else {
         noResults.style.display = "none";
+    }
     }
 }
 
 const sortDropdown = document.getElementById("sort");
 
-sortDropdown.addEventListener("change", sortProducts);
+if (sortDropdown) {
+    sortDropdown.addEventListener("change", sortProducts);
+}
 
 function sortProducts() {
     const value = sortDropdown.value;
@@ -206,3 +184,83 @@ if (selectedCollection) {
 
 
 filterProducts();
+
+// ✅ LOAD PRODUCTS FROM JSON
+fetch("products.json")
+  .then(response => response.json())
+  .then(products => {
+
+    const isHomePage = window.location.pathname.includes("index.html") || window.location.pathname === "/";
+
+    const container = document.getElementById("product-container");
+
+    // safety check
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    products.forEach(product => {
+
+        if (isHomePage && !product.featured) {
+        return; // skip non-featured products on home page
+        }
+
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+        card.setAttribute("data-collection", product.collection);
+
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p class="product-desc">Handcrafted crystal decor piece</p>
+            <p class="price">$${product.price}</p>
+
+            <button 
+                data-name="${product.name}"
+                data-price="${product.price}"
+                data-image="${product.image}"
+                data-link="#"
+            >
+                Add to Cart
+            </button>
+        `;
+
+        container.appendChild(card);
+
+        const button = card.querySelector("button");
+
+    button.addEventListener("click", () => {
+
+        const item = {
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            link: "#"
+        };
+
+        cart.push(item);
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        updateCartCount();
+
+        const message = document.getElementById("cart-message");
+
+        if (message) {
+            message.textContent = item.name + " added to cart 🛒";
+            message.classList.add("show");
+
+            setTimeout(() => {
+                message.classList.remove("show");
+            }, 2000);
+        }
+    });
+
+    });
+
+    filterProducts();
+
+
+})
+    .catch(error => console.log("Error loading products:", error));
+
+  });
