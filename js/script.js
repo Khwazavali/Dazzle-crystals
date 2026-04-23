@@ -184,20 +184,17 @@ fetch("products.json")
 
     if (!container) return;
 
-    // ✅ MOVED FUNCTION HERE (FIX)
     function renderProducts(products) {
 
         const start = currentPage * itemsPerPage;
         const end = start + itemsPerPage;
 
         const featuredProducts = products.filter(p => p.featured);
-        const visibleProducts = products.slice(start, end);
+        const visibleProducts = featuredProducts.slice(start, end); // ✅ FIXED
 
         container.innerHTML = "";
 
         visibleProducts.forEach(product => {
-
-            if (isHomePage && !product.featured) return;
 
             const card = document.createElement("div");
             card.classList.add("product-card");
@@ -253,7 +250,6 @@ fetch("products.json")
 
     }
 
-    // ✅ FIXED LOGIC
     if (isHomePage) {
         renderProducts(products);
     } else {
@@ -334,6 +330,7 @@ fetch("products.json")
         });
 
     }
+
     if(!isHomePage){
         filterProducts();
     }
