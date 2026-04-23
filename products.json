@@ -57,7 +57,7 @@
     "id": "crystal-deer",
     "name": "Crystal Deer",
     "price": 60,
-    "image": "images/deer.jpg",
+    "image": "images/deer.webp",
     "stock": 1,
     "collection": "wildlife",
     "featured": true

@@ -201,7 +201,11 @@ fetch("products.json")
             card.setAttribute("data-collection", product.collection);
 
             card.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
+                ${product.image ? 
+                    `<img src="${product.image}" alt="${product.name}">` 
+                    : 
+                    `<div class="no-image">No Image</div>`
+}
                 <h3>${product.name}</h3>
                 <p class="product-desc">Handcrafted crystal decor piece</p>
                 <p class="price">$${product.price}</p>
