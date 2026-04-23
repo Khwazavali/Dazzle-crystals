@@ -177,7 +177,11 @@ fetch("products.json")
     let currentPage = 0;
     const itemsPerPage = 4;
 
-    const isHomePage = window.location.pathname.includes("index.html") || window.location.pathname === "/";
+    const isHomePage = window.location.pathname.includes("index.html") 
+                || window.location.pathname === "/"
+                || window.location.pathname.endsWith("/dazzle-crystals/")  // ✅ your repo name
+                || window.location.pathname.endsWith("/");                  // ✅ any subfolder root
+
 
     const container = document.getElementById("product-container");
 
