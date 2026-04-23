@@ -333,8 +333,9 @@ fetch("products.json")
         });
 
     }
-
-    filterProducts();
+    if(!isHomePage){
+        filterProducts();
+    }
 
 })
 .catch(error => console.log("Error loading products:", error));
