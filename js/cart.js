@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    let total = 0;
+    let total = 0; /*for test*/
 
     cart.forEach((item, index) => {
 
