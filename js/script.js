@@ -335,9 +335,11 @@ fetch("products.json")
 
     }
 
-    if(!isHomePage){
+    if (!isHomePage) {
+    setTimeout(() => {
         filterProducts();
-    }
+    }, 0);
+}
 
 })
 .catch(error => console.log("Error loading products:", error));
