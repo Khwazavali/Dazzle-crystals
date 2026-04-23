@@ -808,6 +808,7 @@ footer p {
 
 .products-wrapper {
     position: relative;
+    padding: 0 40px;
 }
 
 /* COMMON BUTTON STYLE */
