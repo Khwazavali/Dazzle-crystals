@@ -190,6 +190,7 @@ fetch("products.json")
         const start = currentPage * itemsPerPage;
         const end = start + itemsPerPage;
 
+        const featuredProducts = products.filter(p => p.featured);
         const visibleProducts = products.slice(start, end);
 
         container.innerHTML = "";
