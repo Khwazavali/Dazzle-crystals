@@ -60,6 +60,6 @@
     "image": "images/deer.jpg",
     "stock": 1,
     "collection": "wildlife",
-    "featured": false
+    "featured": true
   }
 ]
