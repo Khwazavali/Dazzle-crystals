@@ -51,7 +51,7 @@
     "image": "images/owl.webp",
     "stock": 1,
     "collection": "wildlife",
-    "featured": false
+    "featured": true
   },
   {
     "id": "crystal-deer",

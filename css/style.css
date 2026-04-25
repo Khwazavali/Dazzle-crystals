@@ -852,3 +852,8 @@ footer p {
     transition: 0.2s;
 }
 
+.nav-btn:disabled {
+    background: #999;
+    cursor: not-allowed;
+    transform: none;
+}

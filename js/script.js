@@ -176,6 +176,7 @@ fetch("products.json")
 
     let currentPage = 0;
     const itemsPerPage = 4;
+    let totalPages = 0;
 
     const isHomePage = window.location.pathname.includes("index.html") 
                 || window.location.pathname === "/"
@@ -184,15 +185,19 @@ fetch("products.json")
 
 
     const container = document.getElementById("product-container");
+    const nextBtn = document.getElementById("next-btn");
+    const prevBtn = document.getElementById("prev-btn");
 
     if (!container) return;
 
     function renderProducts(products) {
 
+        const featuredProducts = products.filter(p => p.featured);
+        totalPages = Math.ceil(featuredProducts.length / itemsPerPage);
+
         const start = currentPage * itemsPerPage;
         const end = start + itemsPerPage;
 
-        const featuredProducts = products.filter(p => p.featured);
         const visibleProducts = featuredProducts.slice(start, end); // ✅ FIXED
 
         container.innerHTML = "";
@@ -254,6 +259,12 @@ fetch("products.json")
             });
 
         });
+
+        // Disable buttons
+    if (prevBtn && nextBtn) {
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage === totalPages - 1;
+    }
 
     }
 
@@ -319,14 +330,14 @@ fetch("products.json")
 
     }
 
-    const nextBtn = document.getElementById("next-btn");
-    const prevBtn = document.getElementById("prev-btn");
 
     if (nextBtn && prevBtn) {
 
         nextBtn.addEventListener("click", () => {
-            currentPage++;
-            renderProducts(products);
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                renderProducts(products);
+                }
         });
 
         prevBtn.addEventListener("click", () => {
