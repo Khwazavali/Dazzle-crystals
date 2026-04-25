@@ -156,18 +156,6 @@ function sortProducts() {
     sortedItems.forEach(item => grid.appendChild(item));
 }
 
-if (selectedCollection) {
-    const checkbox = document.querySelector(
-        `.collection-filter[value="${selectedCollection}"]`
-    );
-
-    if (checkbox) {
-        checkbox.checked = true;
-    }
-
-    filterProducts();
-}
-
 
 // LOAD PRODUCTS
 fetch("products.json")
@@ -327,6 +315,18 @@ fetch("products.json")
             });
 
         });
+
+        // Apply collection filter from URL AFTER rendering
+        if (selectedCollection) {
+        const checkbox = document.querySelector(
+        `.collection-filter[value="${selectedCollection}"]`
+    );
+
+        if (checkbox) {
+        checkbox.checked = true;
+        filterProducts();
+    }
+}
 
     }
 
