@@ -9,6 +9,10 @@ section {
 body {
     font-family: Arial;
     margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* ==================== NAVBAR ==================== */
@@ -458,6 +462,8 @@ footer {
     color: white;
     text-align: center;
     padding: 40px 20px;
+
+    margin-top: auto;
 }
 
 footer h3 {
@@ -477,6 +483,8 @@ footer p {
     gap: 40px;
     padding: 40px 80px;
     background: #e6e6e6;
+
+    flex: 1;
 }
 
 .cart-left {
