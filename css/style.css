@@ -865,3 +865,135 @@ footer p {
     cursor: not-allowed;
     transform: none;
 }
+
+/* ================= CHECKOUT ================= */
+
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+    background: #e6e6e6;
+    flex: 1;
+}
+
+.checkout-box {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.checkout-box h2 {
+    margin-bottom: 20px;
+}
+
+.checkout-box input,
+.checkout-box textarea,
+.checkout-box select{
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.checkout-box button {
+    width: 100%;
+    padding: 12px;
+    background: black;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.checkout-box button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+/* STEP INDICATOR */
+
+.checkout-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 40px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #aaa;
+    font-weight: 500;
+}
+
+.circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    background: white;
+}
+
+.line {
+    width: 120px;
+    height: 2px;
+    background: #ccc;
+}
+
+.step.active {
+    color: black;
+}
+
+.step.active .circle {
+    background: black;
+    color: white;
+    border-color: black;
+}
+
+/* Checkout Row Layout */
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.row input,
+.row select {
+    width: 100%;
+}
+
+/* FORCE ALIGN CITY + STATE */
+
+.row input,
+.row select {
+    width: 100%;
+    padding: 10px;
+    height: 42px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+
+.checkout-box input::placeholder,
+.checkout-box textarea::placeholder {
+    color: #999;
+}
+
+
