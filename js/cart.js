@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cart-count");
+  cartCount.textContent = cart.length;
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartCount = document.getElementById("cart-count");
-    cartCount.textContent = cart.length;
+  const cartContainer = document.getElementById("cart-items");
+  const continueShopping = document.getElementById("continue-shopping-link");
+  const totalDisplay = document.getElementById("total");
+  const subtotalDisplay = document.getElementById("subtotal");
+  const subtotalPrice = document.getElementById("subtotal-price");
 
-    const cartContainer = document.getElementById("cart-items");
-    const totalDisplay = document.getElementById("total");
-    const subtotalDisplay = document.getElementById("subtotal");
-
-    // ✅ SHOW MESSAGE IF CART IS EMPTY
-    if (cart.length === 0) {
-        cartContainer.innerHTML = `
+  // ✅ SHOW MESSAGE IF CART IS EMPTY
+  if (cart.length === 0) {
+    cartContainer.innerHTML = `
             <div class="empty-cart">
                 <i class="fa-solid fa-cart-shopping empty-icon"></i>
                 <h3>Your cart is empty</h3>
@@ -18,19 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 <a href="index.html#collections" class="shop-btn">Shop Now</a>
             </div>
         `;
-        subtotalDisplay.textContent = "Subtotal: $0.00";
-        totalDisplay.textContent = "Total: $0.00";
-        return;
-    }
+    subtotalDisplay.textContent = "Subtotal: $0.00";
+    totalDisplay.textContent = "Total: $0.00";
+    continueShopping.style.display = "none";
+    return;
+  }
 
-    let total = 0; /*for test*/
+  let total = 0; /*for test*/
 
-    cart.forEach((item, index) => {
+  cart.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.classList.add("product-card");
 
-        const div = document.createElement("div");
-        div.classList.add("product-card");
-
-        div.innerHTML = `
+    div.innerHTML = `
         <div class="cart-item-content">
 
             <img src="${item.image}" alt="${item.name}">
@@ -49,26 +50,29 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
 `;
 
-        cartContainer.appendChild(div);
+    cartContainer.appendChild(div);
 
-        total += Number(item.price);
-    });
+    total += Number(item.price);
+  });
 
-    subtotalDisplay.textContent = "Subtotal: $" + total.toFixed(2);
-    totalDisplay.textContent = "Total: $" + total.toFixed(2);
+  const itemText = cart.length === 1 ? "item" : "items";
 
+  subtotalDisplay.textContent = `Subtotal (${cart.length} ${itemText})`;
+
+  subtotalPrice.textContent = "$" + total.toFixed(2);
+
+  totalDisplay.textContent = "$" + total.toFixed(2);
 });
 
-
 function removeItem(index) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    cart.splice(index, 1);
+  cart.splice(index, 1);
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
 
-    const cartCount = document.getElementById("cart-count");
-    cartCount.textContent = cart.length;
+  const cartCount = document.getElementById("cart-count");
+  cartCount.textContent = cart.length;
 
-    location.reload();
+  location.reload();
 }
