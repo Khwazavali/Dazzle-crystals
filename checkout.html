@@ -62,85 +62,130 @@
     </section>
 
     <section class="checkout-container">
-      <!-- STEP 1 -->
-      <div id="step-1">
-        <div class="checkout-box">
-          <h2>Shipping Details</h2>
+      <!-- LEFT SIDE -->
+      <div class="checkout-left">
+        <!-- STEP 1 -->
+        <div id="step-1">
+          <div class="checkout-box">
+            <h2>Shipping Details</h2>
 
-          <input type="text" id="name" placeholder="Full Name" />
+            <input type="text" id="name" placeholder="Full Name" />
 
-          <input type="email" id="email" placeholder="Email" />
+            <input type="email" id="email" placeholder="Email" />
 
-          <div class="phone-group">
-            <span class="country-code">+1</span>
+            <div class="phone-group">
+              <span class="country-code">+1</span>
+
+              <input
+                type="text"
+                id="phone"
+                maxlength="10"
+                placeholder="e.g. 9876543210"
+              />
+            </div>
+
+            <input type="text" id="street" placeholder="Street Address" />
+
+            <div class="row">
+              <input type="text" id="city" placeholder="City" />
+
+              <select id="state">
+                <option value="" disabled selected hidden>Select State</option>
+                <option>CA</option>
+                <option>NY</option>
+                <option>TX</option>
+                <option>FL</option>
+                <option>IL</option>
+                <option>PA</option>
+                <option>OH</option>
+                <option>GA</option>
+                <option>NC</option>
+                <option>MI</option>
+              </select>
+            </div>
+
+            <input type="text" id="zip" placeholder="Zip Code" />
+
+            <button id="next-btn" disabled>Next →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="step-2" style="display: none">
+          <div class="checkout-box">
+            <h2>Card Details</h2>
+
             <input
               type="text"
-              id="phone"
-              maxlength="10"
-              placeholder="e.g. 9876543210"
+              id="card-number"
+              maxlength="19"
+              placeholder="1234 5678 9012 3456"
             />
+
+            <div class="row">
+              <input
+                type="text"
+                id="expiry"
+                maxlength="5"
+                placeholder="MM/YY"
+              />
+
+              <input type="text" id="cvv" maxlength="3" placeholder="CVV" />
+            </div>
+
+            <input type="text" id="card-name" placeholder="Name on Card" />
+
+            <div class="payment-actions">
+              <button id="back-btn" class="secondary-btn">← Previous</button>
+
+              <button id="pay-btn" class="primary-btn" disabled>Pay Now</button>
+            </div>
           </div>
-
-          <input type="text" id="street" placeholder="Street Address" />
-
-          <div class="row">
-            <input type="text" id="city" placeholder="City" />
-
-            <select id="state">
-              <option value="" disabled selected hidden>Select State</option>
-              <option>CA</option>
-              <option>NY</option>
-              <option>TX</option>
-              <option>FL</option>
-              <option>IL</option>
-              <option>PA</option>
-              <option>OH</option>
-              <option>GA</option>
-              <option>NC</option>
-              <option>MI</option>
-            </select>
-          </div>
-
-          <input type="text" id="zip" placeholder="Zip Code" />
-
-          <button id="next-btn" disabled>Next →</button>
         </div>
-      </div>
 
-      <!-- STEP 2 -->
-      <div id="step-2" style="display: none">
-        <div class="checkout-box">
-          <h2>Card Details</h2>
-          <input
-            type="text"
-            id="card-number"
-            maxlength="19"
-            placeholder="1234 5678 9012 3456"
-          />
-          <div class="row">
-            <input type="text" id="expiry" maxlength="5" placeholder="MM/YY" />
-            <input type="text" id="cvv" maxlength="3" placeholder="CVV" />
-          </div>
-          <input type="text" id="card-name" placeholder="Name on Card" />
+        <!-- STEP 3 -->
+        <div id="step-3" style="display: none">
+          <div class="checkout-box success-box">
+            <div class="success-icon">✅</div>
 
-          <div class="payment-actions">
-            <button id="back-btn" class="secondary-btn">← Previous</button>
-            <button id="pay-btn" class="primary-btn" disabled>Pay Now</button>
+            <h2>Order Placed</h2>
+
+            <p>Your order has been successfully placed.</p>
+
+            <p class="order-id">Order ID: <span id="order-id"></span></p>
+
+            <a href="index.html" class="primary-btn"> Continue Shopping </a>
           </div>
         </div>
       </div>
 
-      <!-- STEP 3 -->
-      <div id="step-3" style="display: none">
-        <div class="checkout-box success-box">
-          <div class="success-icon">✅</div>
-          <h2>Order Placed</h2>
+      <!-- RIGHT SIDE -->
+      <div class="checkout-summary">
+        <div class="summary-card">
+          <h2>Order Summary</h2>
 
-          <p>Your order has been successfully placed.</p>
+          <div id="checkout-items"></div>
 
-          <p class="order-id">Order ID: <span id="order-id"></span></p>
+          <hr />
 
-          <a href="index.html" class="primary-btn">Continue Shopping</a>
+          <div class="summary-row">
+            <p>Subtotal</p>
+            <span id="checkout-subtotal">$0.00</span>
+          </div>
+
+          <div class="summary-row">
+            <p>Delivery charges</p>
+            <span id="delivery-charge"
+              >Enter 5 digit zipcode</span
+            >
+          </div>
+
+          <hr />
+
+          <div class="summary-row total-row">
+            <h3>Total</h3>
+            <h3 id="checkout-total">$0.00</h3>
+          </div>
         </div>
       </div>
     </section>

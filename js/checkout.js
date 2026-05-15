@@ -7,7 +7,59 @@ document.addEventListener("DOMContentLoaded", function () {
   const state = document.getElementById("state");
   const zip = document.getElementById("zip");
 
+  const deliveryCharge = document.getElementById("delivery-charge");
+
+  zip.addEventListener("input", function () {
+    const zipValue = zip.value.trim();
+
+    if (/^\d{5}$/.test(zipValue)) {
+      const shipping = 12;
+
+      deliveryCharge.textContent = "$" + shipping.toFixed(2);
+
+      totalElement.textContent = "$" + (total + shipping).toFixed(2);
+    } else {
+      deliveryCharge.textContent = "Enter 5 digit zipcode";
+
+      totalElement.textContent = "$" + total.toFixed(2);
+    }
+  });
+
   const nextBtn = document.getElementById("next-btn");
+
+  // LOAD CART SUMMARY
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const subtotalElement = document.getElementById("checkout-subtotal");
+  const totalElement = document.getElementById("checkout-total");
+
+  let total = 0;
+
+  cart.forEach((item) => {
+    total += Number(item.price);
+  });
+
+  const checkoutItems = document.getElementById("checkout-items");
+
+  cart.forEach((item) => {
+    const itemDiv = document.createElement("div");
+
+    itemDiv.classList.add("checkout-item");
+
+    itemDiv.innerHTML = `
+    <div class="checkout-product-row">
+        <p>${item.name} × 1</p>
+        <span>$${item.price}</span>
+    </div>
+`;
+
+    checkoutItems.appendChild(itemDiv);
+  });
+
+  subtotalElement.textContent = "$" + total.toFixed(2);
+
+  totalElement.textContent = "$" + total.toFixed(2);
 
   // STEP NAVIGATION ELEMENTS
   const step1 = document.getElementById("step-1");

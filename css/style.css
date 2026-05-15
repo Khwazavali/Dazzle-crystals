@@ -504,10 +504,6 @@ footer p {
     margin-bottom: 20px;
 }
 
-.cart-right p {
-    margin: 10px 0;
-    color: #444;
-}
 
 .cart-right h3 {
     margin-top: 20px;
@@ -870,18 +866,91 @@ footer p {
 
 .checkout-container {
     display: flex;
+
+    gap: 25px;
+
+    align-items: flex-start;
     justify-content: center;
-    padding: 30px 20px;
+
+    padding: 24px 50px 40px;
     background: #e6e6e6;
     flex: 1;
+    
 }
 
-.checkout-box {
+/* LEFT SIDE */
+
+.checkout-left {
+    flex: 1;
+    max-width: 640px;
+}
+
+/* RIGHT SIDE */
+
+.checkout-summary {
+    width: 420px;
+
+    position: sticky;
+    top: 110px;
+
+    margin-top: 12px;
+}
+
+/* SUMMARY CARD */
+
+.summary-card {
     background: white;
+
     padding: 30px;
-    width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.summary-card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.summary-card hr {
+    border: none;
+    border-top: 1px solid #d2d2d2;
+
+    margin: 8px 0;
+}
+
+
+.checkout-box {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.zipcode-note {
+    margin: 4px 0 10px;
+
+    font-size: 13px;
+
+    color: #777;
+
+    line-height: 1.4;
+}
+/* CHECKOUT FORM WIDTH */
+
+.checkout-left form,
+.checkout-left #step-1,
+.checkout-left #step-2,
+.checkout-left #step-3 {
+    width: 100%;
+}
+
+/* FORM INPUTS */
+
+.checkout-left input,
+.checkout-left select {
+    background: white;
 }
 
 .checkout-box h2 {
@@ -1108,31 +1177,39 @@ footer p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 5px 0;
+
+    padding: 8px 0;
 }
 
 .summary-row p,
 .summary-row span {
+    margin: 0;
+
     color: #444;
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 500;
 }
 
 .total-row {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .total-row h3 {
     margin: 0;
+
     font-size: 20px;
+    font-weight: 700;
+
     color: black;
 }
 
 .delivery-note {
-    margin-top: 15px;
+    margin-top: 12px;
+
     font-size: 14px;
     line-height: 1.5;
-    color: #777;
-    max-width: 90%;
+
+    color: #666;
 }
 
 /* ================= COUPON BOX ================= */
@@ -1192,4 +1269,19 @@ footer p {
     opacity: 0.6;
 }
 
+.checkout-product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 6px;
+}
+
+.checkout-product-row p,
+.checkout-product-row span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+}
 
