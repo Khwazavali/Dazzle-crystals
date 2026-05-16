@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
       doc.rect(0, 0, 210, 32, "F");
 
       // logo
-      doc.addImage(logo, "PNG", 14, 6, 72, 22);
+      doc.addImage(logo, "PNG", 8, 4, 120, 24);
 
       // order badge
       doc.setFillColor(25, 25, 25);
@@ -420,7 +420,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       y = itemsEndY + 10;
 
-      doc.setTextColor(248);
+      doc.setTextColor(252);
 
       doc.setFont("helvetica", "bold");
 
@@ -525,6 +525,6 @@ document.addEventListener("DOMContentLoaded", function () {
       doc.save(`Receipt-${order.orderId}.pdf`);
     };
 
-    logo.src = "images/DazzlecrystalsLogo.png";
+    logo.src = "images/ReceiptLogo.png";
   });
 });
