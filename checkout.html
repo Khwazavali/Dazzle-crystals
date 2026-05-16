@@ -152,9 +152,19 @@
 
             <p>Your order has been successfully placed.</p>
 
+            <p class="delivery-estimate">
+              Estimated Delivery: 3-5 Business Days
+            </p>
+
             <p class="order-id">Order ID: <span id="order-id"></span></p>
 
-            <a href="index.html" class="primary-btn"> Continue Shopping </a>
+            <div class="success-actions">
+              <button id="download-receipt" class="secondary-btn">
+                Download Receipt
+              </button>
+
+              <a href="index.html" class="primary-btn"> Continue Shopping </a>
+            </div>
           </div>
         </div>
       </div>
@@ -175,9 +185,7 @@
 
           <div class="summary-row">
             <p>Delivery charges</p>
-            <span id="delivery-charge"
-              >Enter 5 digit zipcode</span
-            >
+            <span id="delivery-charge">Enter 5 digit zipcode</span>
           </div>
 
           <hr />
@@ -195,6 +203,8 @@
       <p>Email: dazzlcrystals@email.com</p>
       <p>© 2025 Dazzle Crystals</p>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script src="js/checkout.js"></script>
   </body>

@@ -1130,8 +1130,13 @@ footer p {
 
 .success-box {
     text-align: center;
-    max-width: 450px;
-    margin: 0 auto;
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .success-icon {
@@ -1140,12 +1145,14 @@ footer p {
 }
 
 .order-id {
-    margin-top: 10px;
+    margin-top: 6px;
     font-weight: bold;
     background: #f5f5f5;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 12px 18px;
+    border-radius: 8px;
     display: inline-block;
+    font-size: 18px;
+    letter-spacing: 0.5px;
 }
 
 .success-box .primary-btn {
@@ -1283,5 +1290,48 @@ footer p {
     font-weight: 500;
     color: #333;
     margin: 0;
+}
+
+.success-actions {
+    display: flex;
+    gap: 15px;
+
+    justify-content: center;
+
+    margin-top: 25px;
+}
+
+.success-actions .primary-btn,
+.success-actions .secondary-btn {
+    width: 220px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    padding: 14px 20px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.success-actions .secondary-btn {
+    background: white;
+    border: 1px solid #ccc;
+    color: black;
+}
+
+.success-actions .secondary-btn:hover {
+    background: #f5f5f5;
+}
+
+.delivery-estimate {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+    letter-spacing: 0.3px;
 }
 
