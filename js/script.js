@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // ================= MOBILE MENU =================
+
+  const menuToggle = document.getElementById("menu-toggle");
+  const nav = document.querySelector("nav");
+
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  }
+
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   function isItemInCart(id) {
     return cart.some((item) => item.id === id);
@@ -163,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((products) => {
       let currentPage = 0;
-      const itemsPerPage = 4;
+      const itemsPerPage = window.innerWidth <= 600 ? 1 : 4;
       let totalPages = 0;
 
       const isHomePage =

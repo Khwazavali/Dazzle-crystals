@@ -1,162 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
+  <head>
     <title>Crystal Store</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <img src="images/Logo.svg" alt="Dazzle Crystals Logo" />
+      </div>
 
-<header class="navbar">
-
-    <div class="logo">
-        <img src="images/Logo.svg" alt="Dazzle Crystals Logo">
-    </div>
-
-    <nav>
+      <nav>
         <a href="#home">Home</a>
         <a href="#products">Products</a>
         <a href="#contact">Contact</a>
-    </nav>
+      </nav>
 
-    <div class="nav-right">
+      <div class="nav-right">
+
         <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search crystals...">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search crystals..." />
         </div>
 
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+
         <a href="cart.html" class="cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span id="cart-count">0</span>
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cart-count">0</span>
         </a>
 
         <div id="cart-message" class="cart-message"></div>
-    </div>
+      </div>
+    </header>
 
-</header>
-
-<section id="home" class="hero">
-
-    <div class="hero-text">
+    <section id="home" class="hero">
+      <div class="hero-text">
         <h2>Luxury Crystal Collection</h2>
         <p>Beautiful handcrafted crystal pieces for your home.</p>
-    </div>
+        <a href="shop.html" class="shop-btn">Shop Now</a>
+      </div>
 
-    <a href="#collections" class="scroll-down">↓</a>
+      <a href="#collections" class="scroll-down">↓</a>
+    </section>
 
-</section>
+    <section id="collections" class="collections">
+      <h2>Explore Our Collections</h2>
 
-<section id="collections" class="collections">
+      <div class="collection-grid">
+        <a href="shop.html?collection=wildlife">
+          <div class="collection-card">
+            <img
+              src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4"
+              alt="Crystal Animals"
+            />
+            <div class="collection-text">
+              <h3>Crystal Wildlife</h3>
+              <p>
+                Elegant crystal animals inspired by nature’s most majestic
+                creatures.
+              </p>
+            </div>
+          </div>
+        </a>
 
-<h2>Explore Our Collections</h2>
+        <a href="shop.html?collection=ocean">
+          <div class="collection-card">
+            <img
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+              alt="Ocean Creatures"
+            />
+            <div class="collection-text">
+              <h3>Ocean Treasures</h3>
+              <p>Discover crystal creatures from the deep sea.</p>
+            </div>
+          </div>
+        </a>
 
-<div class="collection-grid">
+        <a href="shop.html?collection=garden">
+          <div class="collection-card">
+            <img
+              src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6"
+              alt="Crystal Flowers"
+            />
+            <div class="collection-text">
+              <h3>Crystal Garden</h3>
+              <p>Delicate crystal flowers that capture the beauty of nature.</p>
+            </div>
+          </div>
+        </a>
 
-<a href="shop.html?collection=wildlife">
-<div class="collection-card">
-<img src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4" alt="Crystal Animals">
-<div class="collection-text">
-    <h3>Crystal Wildlife</h3>
-<p>Elegant crystal animals inspired by nature’s most majestic creatures.</p>
-</div>
-</div>
-</a>
+        <a href="shop.html?collection=fantasy">
+          <div class="collection-card">
+            <img
+              src="https://images.unsplash.com/photo-1534447677768-be436bb09401"
+              alt="Fantasy"
+            />
+            <div class="collection-text">
+              <h3>Fantasy Crystals</h3>
+              <p>Magical figurines inspired by stories and imagination.</p>
+            </div>
+          </div>
+        </a>
 
-<a href="shop.html?collection=ocean">
-<div class="collection-card">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Ocean Creatures">
-<div class="collection-text">
-    <h3>Ocean Treasures</h3>
-<p>Discover crystal creatures from the deep sea.</p>
-</div>
-</div>
-</a>
+        <a href="shop.html?collection=celestial">
+          <div class="collection-card">
+            <img
+              src="https://images.unsplash.com/photo-1519681393784-d120267933ba"
+              alt="Celestial"
+            />
+            <div class="collection-text">
+              <h3>Celestial Collection</h3>
+              <p>Crystal designs inspired by stars and cosmic beauty.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
 
-<a href="shop.html?collection=garden">
-<div class="collection-card">
-<img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Crystal Flowers">
-<div class="collection-text">
-    <h3>Crystal Garden</h3>
-<p>Delicate crystal flowers that capture the beauty of nature.</p>
-</div>
-</div>
-</a>
+    <section id="products" class="products">
+      <h2>Featured Crystals</h2>
 
-<a href="shop.html?collection=fantasy">
-<div class="collection-card">
-<img src="https://images.unsplash.com/photo-1534447677768-be436bb09401" alt="Fantasy">
-<div class="collection-text">
-    <h3>Fantasy Crystals</h3>
-<p>Magical figurines inspired by stories and imagination.</p>
-</div>
-</div>
-</a>
-
-<a href="shop.html?collection=celestial">
-<div class="collection-card">
-<img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Celestial">
-<div class="collection-text">
-    <h3>Celestial Collection</h3>
-<p>Crystal designs inspired by stars and cosmic beauty.</p>
-</div>
-</div>
-</a>
-
-</div>
-
-</section>
-
-
-<section id="products" class="products">
-
-    <h2>Featured Crystals</h2>
-
-    <div class="products-wrapper">
-
+      <div class="products-wrapper">
         <!-- LEFT BUTTON -->
         <button id="prev-btn" class="nav-btn left">←</button>
 
         <!-- PRODUCTS (UNCHANGED GRID) -->
-        <div class="product-grid" id="product-container">
-        </div>
+        <div class="product-grid" id="product-container"></div>
 
         <!-- RIGHT BUTTON -->
         <button id="next-btn" class="nav-btn right">→</button>
+      </div>
+    </section>
 
-    </div>
+    <section id="contact" class="contact-section">
+      <h2>Looking for a special crystal?</h2>
 
-</section>
+      <p>
+        We help collectors find rare Swarovski pieces and unique crystal
+        figurines. Reach out for custom orders or inquiries.
+      </p>
 
+      <a href="mailto:dazzlcrystals@email.com" class="contact-btn">
+        Contact Us
+      </a>
+    </section>
 
-<section id="contact" class="contact-section">
+    <footer>
+      <h3>Dazzle Crystals</h3>
 
-<h2>Looking for a special crystal?</h2>
+      <p>Email: dazzlcrystals@email.com</p>
 
-<p>
-We help collectors find rare Swarovski pieces and unique crystal figurines.
-Reach out for custom orders or inquiries.
-</p>
+      <p>© 2025 Dazzle Crystals</p>
+    </footer>
 
-<a href="mailto:dazzlcrystals@email.com" class="contact-btn">
-Contact Us
-</a>
-
-</section>
-
-<footer>
-
-<h3>Dazzle Crystals</h3>
-
-<p>Email: dazzlcrystals@email.com</p>
-
-<p>© 2025 Dazzle Crystals</p>
-
-</footer>
-
-<script src="js/script.js?v=2"></script>
-
-</body>
+    <script src="js/script.js?v=2"></script>
+  </body>
 </html>
