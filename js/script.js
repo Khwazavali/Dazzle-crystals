@@ -212,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     : `<div class="no-image">No Image</div>`
                 }
                 <h3>${product.name}</h3>
-                <p class="product-desc">Handcrafted crystal decor piece</p>
                 <p class="price">$${product.price}</p>
 
                 <button 
@@ -291,18 +290,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (isHomePage) {
         renderProducts(products);
-      } else {
+      }
+
+      else {
+
+    let currentShopPage = 1;
+
+    const productsPerPage = 8;
+
+    function renderShopProducts() {
+
         container.innerHTML = "";
 
-        products.forEach((product) => {
-          const card = document.createElement("div");
-          card.classList.add("product-card");
-          card.setAttribute("data-collection", product.collection);
+        const start = (currentShopPage - 1) * productsPerPage;
 
-          card.innerHTML = `
+        const end = start + productsPerPage;
+
+        const paginatedProducts = products.slice(start, end);
+
+        paginatedProducts.forEach((product) => {
+
+            const card = document.createElement("div");
+
+            card.classList.add("product-card");
+
+            card.setAttribute("data-collection", product.collection);
+
+            card.innerHTML = `
                 <img src="${product.image}" alt="${product.name}">
+
                 <h3>${product.name}</h3>
-                <p class="product-desc">Handcrafted crystal decor piece</p>
+
                 <p class="price">$${product.price}</p>
 
                 <button 
@@ -315,62 +333,147 @@ document.addEventListener("DOMContentLoaded", function () {
                 </button>
             `;
 
-          container.appendChild(card);
+            container.appendChild(card);
 
-          const button = card.querySelector("button");
-          if (isItemInCart(product.id)) {
-            button.textContent = "✔ Added";
-            button.disabled = true;
-          }
+            const button = card.querySelector("button");
 
-          button.addEventListener("click", () => {
-            // 🔴 If already in cart
             if (isItemInCart(product.id)) {
-              const message = document.getElementById("cart-message");
 
-              if (message) {
-                message.textContent = "Already in your cart ✨";
-                message.classList.add("show");
+                button.textContent = "✔ Added";
 
-                setTimeout(() => {
-                  message.classList.remove("show");
-                }, 2000);
-              }
+                button.disabled = true;
 
-              return;
             }
 
-            // 🟢 Add new item
-            const item = {
-              id: product.id,
-              name: product.name,
-              price: product.price,
-              image: product.image,
-              link: "#",
-            };
+            button.addEventListener("click", () => {
 
-            cart.push(item);
-            localStorage.setItem("cart", JSON.stringify(cart));
+                if (isItemInCart(product.id)) {
 
-            updateCartCount();
+                    const message = document.getElementById("cart-message");
 
-            // ✅ Update button
-            button.textContent = "✔ Added";
-            button.disabled = true;
+                    if (message) {
 
-            // ✅ Show message
-            const message = document.getElementById("cart-message");
+                        message.textContent = "Already in your cart ✨";
 
-            if (message) {
-              message.textContent = item.name + " added to cart 🛒";
-              message.classList.add("show");
+                        message.classList.add("show");
 
-              setTimeout(() => {
-                message.classList.remove("show");
-              }, 2000);
-            }
-          });
+                        setTimeout(() => {
+
+                            message.classList.remove("show");
+
+                        }, 2000);
+
+                    }
+
+                    return;
+
+                }
+
+                const item = {
+
+                    id: product.id,
+
+                    name: product.name,
+
+                    price: product.price,
+
+                    image: product.image,
+
+                    link: "#",
+
+                };
+
+                cart.push(item);
+
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+                updateCartCount();
+
+                button.textContent = "✔ Added";
+
+                button.disabled = true;
+
+                const message = document.getElementById("cart-message");
+
+                if (message) {
+
+                    message.textContent = item.name + " added to cart 🛒";
+
+                    message.classList.add("show");
+
+                    setTimeout(() => {
+
+                        message.classList.remove("show");
+
+                    }, 2000);
+
+                }
+
+            });
+
         });
+
+        renderPagination(products.length);
+
+    }
+
+    function renderPagination(totalProducts) {
+
+        let pagination = document.getElementById("pagination");
+
+        if (!pagination) {
+
+            pagination = document.createElement("div");
+
+            pagination.id = "pagination";
+
+            pagination.classList.add("pagination");
+
+            container.parentElement.appendChild(pagination);
+
+        }
+
+        pagination.innerHTML = "";
+
+        const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+
+            const btn = document.createElement("button");
+
+            btn.textContent = i;
+
+            if (i === currentShopPage) {
+
+                btn.classList.add("active-page");
+
+            }
+
+            btn.addEventListener("click", () => {
+
+                currentShopPage = i;
+
+                renderShopProducts();
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            });
+
+            pagination.appendChild(btn);
+
+        }
+
+    }
+
+    renderShopProducts();
+
+}
 
         // Apply collection filter from URL AFTER rendering
         if (selectedCollection) {
@@ -383,7 +486,6 @@ document.addEventListener("DOMContentLoaded", function () {
             filterProducts();
           }
         }
-      }
 
       if (nextBtn && prevBtn) {
         nextBtn.addEventListener("click", () => {
@@ -403,3 +505,65 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.log("Error loading products:", error));
 });
+
+// =========================
+// MOBILE FILTER MODAL
+// =========================
+
+const openFiltersBtn = document.getElementById("open-filters");
+const closeFiltersBtn = document.getElementById("close-filters");
+const filterOverlay = document.getElementById("filter-overlay");
+
+if (openFiltersBtn && closeFiltersBtn && filterOverlay) {
+
+    openFiltersBtn.addEventListener("click", () => {
+        filterOverlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+    });
+
+    closeFiltersBtn.addEventListener("click", () => {
+        filterOverlay.classList.remove("active");
+        document.body.style.overflow = "auto";
+    });
+
+    filterOverlay.addEventListener("click", (e) => {
+
+        if (e.target === filterOverlay) {
+            filterOverlay.classList.remove("active");
+            document.body.style.overflow = "auto";
+        }
+
+    });
+
+}
+
+const mobileClearBtn = document.getElementById("mobile-clear-filters");
+const applyFiltersBtn = document.getElementById("apply-filters");
+
+if (mobileClearBtn) {
+
+    mobileClearBtn.addEventListener("click", () => {
+
+        document.querySelectorAll(".price-filter").forEach(input => {
+            input.checked = false;
+        });
+
+        document.querySelectorAll(".collection-filter").forEach(input => {
+            input.checked = false;
+        });
+
+    });
+
+}
+
+if (applyFiltersBtn) {
+
+    applyFiltersBtn.addEventListener("click", () => {
+
+        filterOverlay.classList.remove("active");
+
+        document.body.style.overflow = "auto";
+
+    });
+
+}
