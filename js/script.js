@@ -206,23 +206,31 @@ document.addEventListener("DOMContentLoaded", function () {
           card.setAttribute("data-collection", product.collection);
 
           card.innerHTML = `
-                ${
-                  product.image
-                    ? `<img src="${product.image}" alt="${product.name}">`
-                    : `<div class="no-image">No Image</div>`
-                }
-                <h3>${product.name}</h3>
-                <p class="price">$${product.price}</p>
+    ${
+      product.image
+        ? `
+        <a href="product.html?id=${product.id}">
+            <img src="${product.image}" alt="${product.name}">
+        </a>
+        `
+        : `<div class="no-image">No Image</div>`
+    }
 
-                <button 
-                    data-name="${product.name}"
-                    data-price="${product.price}"
-                    data-image="${product.image}"
-                    data-link="#"
-                >
-                    Add to Cart
-                </button>
-            `;
+    <a href="product.html?id=${product.id}" class="product-link">
+        <h3>${product.name}</h3>
+    </a>
+
+    <p class="price">$${product.price}</p>
+
+    <button 
+        data-name="${product.name}"
+        data-price="${product.price}"
+        data-image="${product.image}"
+        data-link="#"
+    >
+        Add to Cart
+    </button>
+`;
 
           container.appendChild(card);
 
@@ -290,26 +298,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (isHomePage) {
         renderProducts(products);
-      }
+      } else {
+        let currentShopPage = 1;
 
-      else {
+        const productsPerPage = 8;
 
-    let currentShopPage = 1;
+        function renderShopProducts() {
+          container.innerHTML = "";
 
-    const productsPerPage = 8;
+          const start = (currentShopPage - 1) * productsPerPage;
 
-    function renderShopProducts() {
+          const end = start + productsPerPage;
 
-        container.innerHTML = "";
+          const paginatedProducts = products.slice(start, end);
 
-        const start = (currentShopPage - 1) * productsPerPage;
-
-        const end = start + productsPerPage;
-
-        const paginatedProducts = products.slice(start, end);
-
-        paginatedProducts.forEach((product) => {
-
+          paginatedProducts.forEach((product) => {
             const card = document.createElement("div");
 
             card.classList.add("product-card");
@@ -317,112 +320,96 @@ document.addEventListener("DOMContentLoaded", function () {
             card.setAttribute("data-collection", product.collection);
 
             card.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
+    <a href="product.html?id=${product.id}">
+        <img src="${product.image}" alt="${product.name}">
+    </a>
 
-                <h3>${product.name}</h3>
+    <a href="product.html?id=${product.id}" class="product-link">
+        <h3>${product.name}</h3>
+    </a>
 
-                <p class="price">$${product.price}</p>
+    <p class="price">$${product.price}</p>
 
-                <button 
-                    data-name="${product.name}"
-                    data-price="${product.price}"
-                    data-image="${product.image}"
-                    data-link="#"
-                >
-                    Add to Cart
-                </button>
-            `;
+    <button 
+        data-name="${product.name}"
+        data-price="${product.price}"
+        data-image="${product.image}"
+        data-link="#"
+    >
+        Add to Cart
+    </button>
+`;
 
             container.appendChild(card);
 
             const button = card.querySelector("button");
 
             if (isItemInCart(product.id)) {
+              button.textContent = "✔ Added";
 
-                button.textContent = "✔ Added";
-
-                button.disabled = true;
-
+              button.disabled = true;
             }
 
             button.addEventListener("click", () => {
-
-                if (isItemInCart(product.id)) {
-
-                    const message = document.getElementById("cart-message");
-
-                    if (message) {
-
-                        message.textContent = "Already in your cart ✨";
-
-                        message.classList.add("show");
-
-                        setTimeout(() => {
-
-                            message.classList.remove("show");
-
-                        }, 2000);
-
-                    }
-
-                    return;
-
-                }
-
-                const item = {
-
-                    id: product.id,
-
-                    name: product.name,
-
-                    price: product.price,
-
-                    image: product.image,
-
-                    link: "#",
-
-                };
-
-                cart.push(item);
-
-                localStorage.setItem("cart", JSON.stringify(cart));
-
-                updateCartCount();
-
-                button.textContent = "✔ Added";
-
-                button.disabled = true;
-
+              if (isItemInCart(product.id)) {
                 const message = document.getElementById("cart-message");
 
                 if (message) {
+                  message.textContent = "Already in your cart ✨";
 
-                    message.textContent = item.name + " added to cart 🛒";
+                  message.classList.add("show");
 
-                    message.classList.add("show");
-
-                    setTimeout(() => {
-
-                        message.classList.remove("show");
-
-                    }, 2000);
-
+                  setTimeout(() => {
+                    message.classList.remove("show");
+                  }, 2000);
                 }
 
+                return;
+              }
+
+              const item = {
+                id: product.id,
+
+                name: product.name,
+
+                price: product.price,
+
+                image: product.image,
+
+                link: "#",
+              };
+
+              cart.push(item);
+
+              localStorage.setItem("cart", JSON.stringify(cart));
+
+              updateCartCount();
+
+              button.textContent = "✔ Added";
+
+              button.disabled = true;
+
+              const message = document.getElementById("cart-message");
+
+              if (message) {
+                message.textContent = item.name + " added to cart 🛒";
+
+                message.classList.add("show");
+
+                setTimeout(() => {
+                  message.classList.remove("show");
+                }, 2000);
+              }
             });
+          });
 
-        });
+          renderPagination(products.length);
+        }
 
-        renderPagination(products.length);
+        function renderPagination(totalProducts) {
+          let pagination = document.getElementById("pagination");
 
-    }
-
-    function renderPagination(totalProducts) {
-
-        let pagination = document.getElementById("pagination");
-
-        if (!pagination) {
-
+          if (!pagination) {
             pagination = document.createElement("div");
 
             pagination.id = "pagination";
@@ -430,62 +417,51 @@ document.addEventListener("DOMContentLoaded", function () {
             pagination.classList.add("pagination");
 
             container.parentElement.appendChild(pagination);
+          }
 
-        }
+          pagination.innerHTML = "";
 
-        pagination.innerHTML = "";
+          const totalPages = Math.ceil(totalProducts / productsPerPage);
 
-        const totalPages = Math.ceil(totalProducts / productsPerPage);
-
-        for (let i = 1; i <= totalPages; i++) {
-
+          for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement("button");
 
             btn.textContent = i;
 
             if (i === currentShopPage) {
-
-                btn.classList.add("active-page");
-
+              btn.classList.add("active-page");
             }
 
             btn.addEventListener("click", () => {
+              currentShopPage = i;
 
-                currentShopPage = i;
+              renderShopProducts();
 
-                renderShopProducts();
+              window.scrollTo({
+                top: 0,
 
-                window.scrollTo({
-
-                    top: 0,
-
-                    behavior: "smooth"
-
-                });
-
+                behavior: "smooth",
+              });
             });
 
             pagination.appendChild(btn);
-
-        }
-
-    }
-
-    renderShopProducts();
-
-}
-
-        // Apply collection filter from URL AFTER rendering
-        if (selectedCollection) {
-          const checkbox = document.querySelector(
-            `.collection-filter[value="${selectedCollection}"]`,
-          );
-
-          if (checkbox) {
-            checkbox.checked = true;
-            filterProducts();
           }
         }
+
+        renderShopProducts();
+      }
+
+      // Apply collection filter from URL AFTER rendering
+      if (selectedCollection) {
+        const checkbox = document.querySelector(
+          `.collection-filter[value="${selectedCollection}"]`,
+        );
+
+        if (checkbox) {
+          checkbox.checked = true;
+          filterProducts();
+        }
+      }
 
       if (nextBtn && prevBtn) {
         nextBtn.addEventListener("click", () => {
@@ -515,55 +491,43 @@ const closeFiltersBtn = document.getElementById("close-filters");
 const filterOverlay = document.getElementById("filter-overlay");
 
 if (openFiltersBtn && closeFiltersBtn && filterOverlay) {
+  openFiltersBtn.addEventListener("click", () => {
+    filterOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  });
 
-    openFiltersBtn.addEventListener("click", () => {
-        filterOverlay.classList.add("active");
-        document.body.style.overflow = "hidden";
-    });
+  closeFiltersBtn.addEventListener("click", () => {
+    filterOverlay.classList.remove("active");
+    document.body.style.overflow = "auto";
+  });
 
-    closeFiltersBtn.addEventListener("click", () => {
-        filterOverlay.classList.remove("active");
-        document.body.style.overflow = "auto";
-    });
-
-    filterOverlay.addEventListener("click", (e) => {
-
-        if (e.target === filterOverlay) {
-            filterOverlay.classList.remove("active");
-            document.body.style.overflow = "auto";
-        }
-
-    });
-
+  filterOverlay.addEventListener("click", (e) => {
+    if (e.target === filterOverlay) {
+      filterOverlay.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  });
 }
 
 const mobileClearBtn = document.getElementById("mobile-clear-filters");
 const applyFiltersBtn = document.getElementById("apply-filters");
 
 if (mobileClearBtn) {
-
-    mobileClearBtn.addEventListener("click", () => {
-
-        document.querySelectorAll(".price-filter").forEach(input => {
-            input.checked = false;
-        });
-
-        document.querySelectorAll(".collection-filter").forEach(input => {
-            input.checked = false;
-        });
-
+  mobileClearBtn.addEventListener("click", () => {
+    document.querySelectorAll(".price-filter").forEach((input) => {
+      input.checked = false;
     });
 
+    document.querySelectorAll(".collection-filter").forEach((input) => {
+      input.checked = false;
+    });
+  });
 }
 
 if (applyFiltersBtn) {
+  applyFiltersBtn.addEventListener("click", () => {
+    filterOverlay.classList.remove("active");
 
-    applyFiltersBtn.addEventListener("click", () => {
-
-        filterOverlay.classList.remove("active");
-
-        document.body.style.overflow = "auto";
-
-    });
-
+    document.body.style.overflow = "auto";
+  });
 }

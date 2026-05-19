@@ -4,62 +4,138 @@
     "name": "Crystal Bowl",
     "price": 40,
     "image": "images/crystalbowl.webp",
+    "gallery": [
+      "images/crystalbowl.webp",
+      "images/crystalbowl.webp",
+      "images/crystalbowl.webp"
+    ],
     "stock": 1,
     "collection": "garden",
-    "featured": true
+    "featured": true,
+    "tag": "One-of-a-kind",
+    "material": "Premium Crystal Glass",
+    "dimensions": "8 x 5 inches",
+    "weight": "1.2 kg",
+    "description": "An elegant handcrafted crystal bowl inspired by timeless luxury and celestial reflections. Its sculpted cuts beautifully capture light and bring sophistication to any space."
   },
+
   {
     "id": "quartz-statue",
     "name": "Quartz Statue",
     "price": 55,
     "image": "images/quartzstatue.webp",
+    "gallery": [
+      "images/quartzstatue.webp",
+      "images/quartzstatue.webp",
+      "images/quartzstatue.webp"
+    ],
     "stock": 1,
     "collection": "celestial",
-    "featured": true
+    "featured": true,
+    "tag": "Handcrafted",
+    "material": "Rose Quartz Crystal",
+    "dimensions": "7 x 4 inches",
+    "weight": "900 g",
+    "description": "A delicate quartz sculpture with soft tones and refined detailing. Designed to bring calm elegance and artistic charm into modern interiors."
   },
+
   {
     "id": "crystal-lamp",
     "name": "Crystal Lamp",
     "price": 70,
     "image": "images/crystallamp.webp",
+    "gallery": [
+      "images/crystallamp.webp",
+      "images/crystallamp.webp",
+      "images/crystallamp.webp"
+    ],
     "stock": 1,
     "collection": "fantasy",
-    "featured": true
+    "featured": true,
+    "tag": "Limited Piece",
+    "material": "Crystal & Silver Finish",
+    "dimensions": "12 x 6 inches",
+    "weight": "2.5 kg",
+    "description": "An artistic crystal lamp crafted to create a luxurious atmosphere. Its reflective surfaces illuminate spaces with warmth and elegance."
   },
+
   {
     "id": "crystal-lion",
     "name": "Crystal Lion",
     "price": 65,
     "image": "images/lion.webp",
+    "gallery": [
+      "images/lion.webp",
+      "images/lion.webp",
+      "images/lion.webp"
+    ],
     "stock": 1,
     "collection": "wildlife",
-    "featured": true
+    "featured": true,
+    "tag": "Collector's Edition",
+    "material": "Crystal Resin",
+    "dimensions": "10 x 8 inches",
+    "weight": "1.8 kg",
+    "description": "A majestic crystal lion symbolizing strength and confidence. Carefully sculpted with realistic details and luxurious craftsmanship."
   },
+
   {
     "id": "crystal-elephant",
     "name": "Crystal Elephant",
     "price": 75,
     "image": "images/elephant.webp",
+    "gallery": [
+      "images/elephant.webp",
+      "images/elephant.webp",
+      "images/elephant.webp"
+    ],
     "stock": 1,
     "collection": "wildlife",
-    "featured": false
+    "featured": false,
+    "tag": "Rare Piece",
+    "material": "Crystal Stone Finish",
+    "dimensions": "9 x 6 inches",
+    "weight": "2 kg",
+    "description": "A graceful crystal elephant representing wisdom and serenity. Designed with rich earthy tones and intricate handcrafted textures."
   },
+
   {
     "id": "crystal-owl",
     "name": "Crystal Owl",
     "price": 50,
     "image": "images/owl.webp",
+    "gallery": [
+      "images/owl.webp",
+      "images/owl.webp",
+      "images/owl.webp"
+    ],
     "stock": 1,
     "collection": "wildlife",
-    "featured": true
+    "featured": true,
+    "tag": "Handcrafted",
+    "material": "Crystal Glass",
+    "dimensions": "6 x 5 inches",
+    "weight": "700 g",
+    "description": "A beautifully detailed crystal owl inspired by mystery and wisdom. Its elegant silhouette creates a refined decorative statement."
   },
+
   {
     "id": "crystal-deer",
     "name": "Crystal Deer",
     "price": 60,
     "image": "images/deer.webp",
+    "gallery": [
+      "images/deer.webp",
+      "images/deer.webp",
+      "images/deer.webp"
+    ],
     "stock": 1,
     "collection": "wildlife",
-    "featured": true
+    "featured": true,
+    "tag": "Nature Inspired",
+    "material": "Premium Crystal Finish",
+    "dimensions": "11 x 7 inches",
+    "weight": "1.5 kg",
+    "description": "A graceful crystal deer capturing the elegance of wildlife and nature. Crafted with refined details for collectors and luxury decor lovers."
   }
 ]
