@@ -1,135 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
-
+  <head>
     <title>Product Details</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!-- NAVBAR -->
 
     <header class="navbar">
+      <div class="logo">
+        <img src="images/Logo.svg" alt="Dazzle Crystals Logo" />
+      </div>
 
-        <div class="logo">
-            <img src="images/Logo.svg" alt="Dazzle Crystals Logo">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Products</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <button class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search crystals..." />
         </div>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="shop.html">Products</a>
-            <a href="index.html#contact">Contact</a>
-        </nav>
-
-        <div class="nav-right">
-
-            <button class="menu-toggle">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-            <button class="search-toggle">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-
-            <a href="cart.html" class="cart">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span id="cart-count">0</span>
-            </a>
-
-        </div>
-
+        <a href="cart.html" class="cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cart-count">0</span>
+        </a>
+      </div>
     </header>
 
     <!-- PRODUCT SECTION -->
 
     <section class="product-detail">
+      <!-- LEFT -->
 
-        <!-- LEFT -->
-
-        <div class="product-gallery">
-
-            <div class="main-image">
-                <img id="main-product-image" src="" alt="">
-            </div>
-
-            <div class="thumbnail-row" id="thumbnail-row">
-            </div>
-
+      <div class="product-gallery">
+        <div class="main-image">
+          <img id="main-product-image" src="" alt="" />
         </div>
 
-        <!-- RIGHT -->
+        <div class="thumbnail-row" id="thumbnail-row"></div>
+      </div>
 
-        <div class="product-info">
+      <!-- RIGHT -->
 
-            <h1 id="product-name"></h1>
+      <div class="product-info">
+        <h1 id="product-name"></h1>
 
-            <p class="product-price" id="product-price"></p>
+        <p class="product-price" id="product-price"></p>
 
-            <div class="product-description">
-                <p id="product-description"></p>
-            </div>
-
-            <div class="product-meta">
-
-                <div class="meta-block">
-                    <h4>Dimensions</h4>
-                    <p id="product-dimensions"></p>
-                </div>
-
-                <div class="meta-block">
-                    <h4>Weight</h4>
-                    <p id="product-weight"></p>
-                </div>
-
-                <div class="meta-block">
-                    <h4>Material</h4>
-                    <p id="product-material"></p>
-                </div>
-
-            </div>
-
-            <button class="detail-add-cart" id="detail-add-cart">
-                Add to Cart
-            </button>
-
+        <div class="product-description">
+          <p id="product-description"></p>
         </div>
 
+        <div class="product-meta">
+          <div class="meta-block">
+            <h4>Dimensions</h4>
+            <p id="product-dimensions"></p>
+          </div>
+
+          <div class="meta-block">
+            <h4>Weight</h4>
+            <p id="product-weight"></p>
+          </div>
+
+          <div class="meta-block">
+            <h4>Material</h4>
+            <p id="product-material"></p>
+          </div>
+        </div>
+
+        <button class="detail-add-cart" id="detail-add-cart">
+          Add to Cart
+        </button>
+      </div>
     </section>
 
     <!-- RELATED PRODUCTS -->
 
     <section class="related-products">
+      <h2>You May Also Like</h2>
 
-        <h2>You May Also Like</h2>
-
-        <div class="product-grid" id="related-products-container">
-        </div>
-
+      <div class="product-grid" id="related-products-container"></div>
     </section>
 
     <!-- FOOTER -->
 
     <footer>
+      <h3>Dazzle Crystals</h3>
 
-        <h3>Dazzle Crystals</h3>
+      <p>Email: dazzlcrystals@email.com</p>
 
-        <p>Email: dazzlcrystals@email.com</p>
-
-        <p>© 2025 Dazzle Crystals</p>
-
+      <p>© 2025 Dazzle Crystals</p>
     </footer>
 
     <script src="js/product.js"></script>
-
-</body>
-
+  </body>
 </html>

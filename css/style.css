@@ -2000,17 +2000,17 @@ nav a {
 
     align-items: flex-start;
 
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 /* LEFT */
 
 .product-gallery {
-    width: 46%;
+    width: 40%;
 }
 
 .main-image {
-    width: 80%;
+    width: 78%;
 
     background: white;
 
@@ -2076,32 +2076,42 @@ nav a {
     position: sticky;
 
     top: 120px;
+
+    gap: 0;
+
+    margin-top: -30px;
 }
 
 .product-info h1 {
-    font-size: 42px;
+    font-size: 40px;
 
-    font-weight: 600;
+    font-weight: 550;
 
-    margin-bottom: 10px;
+    line-height: 1.08;
 
-    line-height: 1.1;
+    letter-spacing: -1px;
+
+    margin-bottom: 14px;
 }
 
 .product-price {
-    font-size: 28px;
+    font-size: 30px;
 
-    font-weight: 700;
+    font-weight: 600;
 
     color: #a68d2d;
 
+    margin-top: 0;
+
     margin-bottom: 18px;
+
+    letter-spacing: -0.3px;
 }
 
 .product-description {
-    border-top: 1px solid #ddd;
+    border-top: 2px solid #ddd;
 
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
 
     padding: 14px 0;
 
@@ -2109,13 +2119,15 @@ nav a {
 }
 
 .product-description p {
-    font-size: 18px;
+    font-size: 19px;
 
-    line-height: 1.7;
+    line-height: 1.8;
 
     color: #555;
 
-    margin-bottom: 14px;
+    font-weight: 400;
+
+    margin: 0;
 }
 
 .product-meta {
@@ -2126,27 +2138,31 @@ nav a {
 
     margin-bottom: 20px;
 
-    margin-top: 8px;
+    margin-top: -10px;
 }
 .meta-block {
     padding: 0;
-    margin: 0;
+    margin: -2px;
 }
 
 .meta-block h4 {
-    font-size: 18px;
+    font-size: 19px;
 
-    margin-bottom: 8px;
+    margin-bottom: 0px;
 
-    font-weight: 600;
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
 }
 
 .meta-block p {
     color: #666;
 
-    line-height: 1.5;
+    line-height: 1.6;
 
-    font-size: 18px;
+    font-size: 19px;
+
+    font-weight: 400;
 
     margin: 0;
 }
@@ -2206,7 +2222,7 @@ nav a {
     }
 
     .main-image img {
-        width: 100%;
+    width: 100%;
 
     height: 520px;
 
