@@ -1994,9 +1994,9 @@ nav a {
 
     gap: 0px;
 
-    padding: 60px 8%;
+    padding: 60px 6%;
 
-    background: #e6e6e6;
+    background: white;
 
     align-items: flex-start;
 
@@ -2075,7 +2075,7 @@ nav a {
 
     position: sticky;
 
-    top: 120px;
+    top: 150px;
 
     gap: 0;
 
@@ -2109,9 +2109,9 @@ nav a {
 }
 
 .product-description {
-    border-top: 2px solid #ddd;
+    border-top: 1px solid #ddd;
 
-    border-bottom: 2px solid #ddd;
+    border-bottom: 1px solid #ddd;
 
     padding: 14px 0;
 
@@ -2170,7 +2170,7 @@ nav a {
 .detail-add-cart {
     width: 100%;
 
-    height: 56px;
+    height: 50px;
 
     background: black;
 
@@ -2196,15 +2196,15 @@ nav a {
 /* RELATED PRODUCTS */
 
 .related-products {
-    padding: 40px 8% 80px;
+    padding: 0px 8% 80px;
 
-    background: #e9e9e9;
+    background: #f3f3f3;
 }
 
 .related-products h2 {
-    font-size: 36px;
+    font-size: 28px;
 
-    margin-bottom: 34px;
+    margin-bottom: 28px;
 }
 
 /* =========================
@@ -2287,12 +2287,32 @@ nav a {
 
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 24px;
+    gap: 35px;
+
+    margin-top: 20px;
 }
 
 .related-products .product-card img {
     height: 220px;
 
-    object-fit: cover;
+    object-fit: contain;
+
+    background: white;
+}
+/* ================= RELATED PRODUCTS ARROWS ================= */
+
+.related-products .products-wrapper {
+    position: relative;
 }
 
+.related-products .nav-btn.left {
+    left: -55px;
+}
+
+.related-products .nav-btn.right {
+    right: -55px;
+}
+
+.related-products .nav-btn {
+    top: 52%;
+}
