@@ -2542,9 +2542,9 @@ nav a {
 
     padding: 42px;
 
-    border-radius: 0px;
+    border-radius: 18px;
 
-    box-shadow: 0 10px 35px rgba(0,0,0,0.03);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
 
     transition: 0.3s ease;
 }
@@ -2612,7 +2612,7 @@ nav a {
 
     background: #fafafa;
 
-    border-radius: 0px;
+    border-radius: 10px;
 
     font-size: 15px;
 
@@ -2662,7 +2662,7 @@ nav a {
 
     border: none;
 
-    border-radius: 0px;
+    border-radius: 10px;
 
     font-size: 15px;
 
