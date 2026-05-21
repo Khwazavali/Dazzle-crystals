@@ -121,6 +121,218 @@ nav {
     display: flex;
     align-items: center;
     gap: 20px;
+    position: relative;
+}
+
+/* =========================
+   SIGN IN BUTTON
+========================= */
+
+.signin-btn {
+
+    height: 42px;
+
+    padding: 0 18px;
+
+    border-radius: 10px;
+
+    border: 1px solid #2d2d2d;
+
+    background: black;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    font-size: 15px;
+
+    font-weight: 500;
+}
+
+.signin-btn i {
+
+    font-size: 15px;
+}
+
+.signin-btn:hover {
+
+    border-color: #b89b5e;
+
+    color: #b89b5e;
+
+    transform: translateY(-1px);
+}
+
+/* =========================
+   LOGGED IN BUTTON
+========================= */
+
+.signin-btn.logged-in {
+
+    width: 44px;
+
+    height: 44px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    justify-content: center;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    background: white;
+
+    color: black;
+
+    border: none;
+}
+
+/* HIDE USER ICON */
+
+.signin-btn.logged-in i {
+
+    display: none;
+}
+
+/* HOVER */
+
+.signin-btn.logged-in:hover {
+
+    background: #b89b5e;
+
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+/* =========================
+   ACCOUNT DROPDOWN
+========================= */
+
+.account-dropdown {
+
+    position: absolute;
+
+    top: 70px;
+
+    right: -25px;
+
+    width: 205px;
+
+    background: #fcfcfc;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(0,0,0,0.08);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.08),
+        0 25px 50px rgba(0,0,0,0.14);
+
+    padding: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(12px);
+
+    transition: 0.25s ease;
+
+    z-index: 1000;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+/* SHOW */
+
+.account-dropdown.show-dropdown {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+/* LINKS + BUTTON */
+
+.account-dropdown a,
+.account-dropdown button {
+
+
+    height: 44px;
+
+    border: none;
+
+    background: none;
+
+    border-radius: 10px;
+
+    padding: 0 8px 0 6px;
+
+    display: flex;
+
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #111;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+    width: 100%;
+}
+
+.account-dropdown i {
+
+    width: 20px;
+    text-align: center;
+
+    font-size: 15px;
+
+    opacity: 0.8;
+}
+
+/* HOVER */
+
+.account-dropdown a:hover,
+.account-dropdown button:hover {
+
+    background: rgba(0,0,0,0.06);
+}
+
+/* LOGOUT */
+
+#logout-btn {
+
+    color: #c0392b;
+
+    font-weight: 600;
 }
 
 /* ==================== MOBILE MENU BUTTON ==================== */
@@ -300,7 +512,7 @@ nav {
 }
 
 .product-card h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     margin: 6px 0 4px;
 }
@@ -2961,5 +3173,278 @@ nav a {
     .contact-hero h1 {
 
         font-size: 40px;
+    }
+}
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+.auth-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.68);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 3000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s ease;
+}
+
+/* ACTIVE OVERLAY */
+
+.auth-overlay.show-auth {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+/* MODAL */
+
+.auth-modal {
+
+    width: 420px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 36px;
+
+    position: relative;
+
+    box-shadow: 0 12px 45px rgba(0,0,0,0.18);
+
+    transform: translateY(14px) scale(0.98);
+
+    transition: 0.3s ease;
+}
+
+/* MODAL ANIMATION */
+
+.auth-overlay.show-auth .auth-modal {
+
+    transform: translateY(0) scale(1);
+}
+
+/* CLOSE BUTTON */
+
+.auth-close {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 18px;
+
+    width: 36px;
+
+    height: 36px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f4f4f4;
+
+    cursor: pointer;
+
+    font-size: 22px;
+
+    transition: 0.3s ease;
+}
+
+.auth-close:hover {
+
+    background: black;
+
+    color: white;
+}
+
+/* HEADER */
+
+.auth-header {
+
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+.auth-header h2 {
+
+    font-size: 22px;
+
+    font-weight: 650;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 8px;
+}
+
+.auth-header p {
+
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+/* TABS */
+
+.auth-tabs {
+
+    display: flex;
+
+    border-bottom: 1px solid #e5e5e5;
+
+    margin-bottom: 30px;
+}
+
+.auth-tab {
+
+    flex: 1;
+
+    background: none;
+
+    border: none;
+
+    padding-bottom: 14px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    position: relative;
+
+    color: #777;
+
+    transition: 0.3s ease;
+}
+
+/* ACTIVE TAB */
+
+.auth-tab.active-tab {
+
+    color: black;
+}
+
+.auth-tab.active-tab::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -1px;
+
+    width: 100%;
+
+    height: 2px;
+
+    background: #b89b5e;
+}
+
+/* FORMS */
+
+.auth-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+/* HIDDEN FORM */
+
+.hidden-form {
+
+    display: none;
+}
+
+/* INPUTS */
+
+.auth-form input {
+
+    height: 52px;
+
+    padding: 0 16px;
+
+    border-radius: 10px;
+
+    border: 1px solid #e2e2e2;
+
+    background: #f7f7f7;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.3s ease;
+}
+
+.auth-form input:focus {
+
+    border-color: #b89b5e;
+
+    background: white;
+}
+
+/* BUTTON */
+
+.auth-submit-btn {
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: black;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    margin-top: 6px;
+}
+
+.auth-submit-btn:hover {
+
+    background: #b89b5e;
+}
+
+/* MOBILE */
+
+@media (max-width: 520px) {
+
+    .auth-modal {
+
+        width: 92%;
+
+        padding: 34px 24px;
     }
 }
