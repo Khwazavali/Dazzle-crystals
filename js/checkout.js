@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
+  const cartCount = document.getElementById("cart-count");
+
+  if (cartCount) {
+    cartCount.textContent = cart.length;
+  }
+
   const subtotalElement = document.getElementById("checkout-subtotal");
   const totalElement = document.getElementById("checkout-total");
 
@@ -226,7 +232,13 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     // clear cart
-    localStorage.removeItem(cartKey);
+    localStorage.setItem(cartKey, JSON.stringify([]));
+
+    const cartCount = document.getElementById("cart-count");
+
+    if (cartCount) {
+      cartCount.textContent = "0";
+    }
   });
 
   // receipt pdf
