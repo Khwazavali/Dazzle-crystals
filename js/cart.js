@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
   const cartCount = document.getElementById("cart-count");
   cartCount.textContent = cart.length;
 
@@ -65,11 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function removeItem(index) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
   cart.splice(index, 1);
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem(cartKey, JSON.stringify(cart));
 
   const cartCount = document.getElementById("cart-count");
   cartCount.textContent = cart.length;

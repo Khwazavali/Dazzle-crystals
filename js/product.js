@@ -73,7 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const addCartBtn = document.getElementById("detail-add-cart");
 
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+      const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
+
+      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
       const exists = cart.some((item) => item.id === product.id);
 
@@ -82,7 +86,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       addCartBtn.addEventListener("click", () => {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        const cartKey = currentUser
+          ? `cart_${currentUser.email}`
+          : "cart_guest";
+
+        let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
         const exists = cart.some((item) => item.id === product.id);
 
@@ -106,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cart.push(item);
 
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem(cartKey, JSON.stringify(cart));
 
         addCartBtn.textContent = "✔ Added to Cart";
 
@@ -175,7 +185,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const relatedAddBtn = card.querySelector(".related-add-cart");
 
-          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+          const cartKey = currentUser
+            ? `cart_${currentUser.email}`
+            : "cart_guest";
+
+          let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
           const exists = cart.some((cartItem) => cartItem.id === item.id);
 
@@ -184,7 +200,13 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           relatedAddBtn.addEventListener("click", () => {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+            const cartKey = currentUser
+              ? `cart_${currentUser.email}`
+              : "cart_guest";
+
+            let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
             const exists = cart.some((cartItem) => cartItem.id === item.id);
 
@@ -208,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             cart.push(cartItem);
 
-            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.setItem(cartKey, JSON.stringify(cart));
 
             relatedAddBtn.textContent = "✔ Added";
 

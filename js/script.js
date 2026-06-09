@@ -10,7 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  // =========================
+  // CURRENT USER CART KEY
+  // =========================
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
+
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
   function isItemInCart(id) {
     return cart.some((item) => item.id === id);
   }
@@ -267,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             cart.push(item);
-            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.setItem(cartKey, JSON.stringify(cart));
 
             updateCartCount();
 
@@ -381,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
               cart.push(item);
 
-              localStorage.setItem("cart", JSON.stringify(cart));
+              localStorage.setItem(cartKey, JSON.stringify(cart));
 
               updateCartCount();
 

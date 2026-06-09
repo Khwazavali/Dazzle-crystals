@@ -29,7 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // LOAD CART SUMMARY
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
+
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
   const subtotalElement = document.getElementById("checkout-subtotal");
   const totalElement = document.getElementById("checkout-total");
@@ -222,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     // clear cart
-    localStorage.removeItem("cart");
+    localStorage.removeItem(cartKey);
   });
 
   // receipt pdf
