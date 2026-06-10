@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Orders</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <img src="images/Logo.svg" alt="Dazzle Crystals Logo" />
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#shop.html">Products</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search crystals..." />
+        </div>
+
+        <button class="signin-btn" id="signin-btn">
+          <i class="fa-regular fa-user"></i>
+
+          <span id="signin-text">Sign In</span>
+        </button>
+
+        <div class="account-dropdown" id="account-dropdown">
+          <a href="#">
+            <i class="fa-regular fa-user"></i>
+
+            <span>My Account</span>
+          </a>
+
+          <a href="#">
+            <i class="fa-regular fa-heart"></i>
+
+            <span>Wishlist</span>
+          </a>
+
+          <a href="orders.html">
+            <i class="fa-solid fa-box"></i>
+
+            <span>Orders</span>
+          </a>
+
+          <button id="logout-btn">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+            <span>Logout</span>
+          </button>
+        </div>
+
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+
+        <a href="cart.html" class="cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cart-count">0</span>
+        </a>
+
+        <div id="cart-message" class="cart-message"></div>
+      </div>
+    </header>
+
+    <section class="orders-page">
+      <div class="orders-header">
+        <h1>My Orders</h1>
+
+        <p>Track your crystal purchases and order history.</p>
+      </div>
+
+      <div class="orders-stats">
+        <div class="stat-card">
+          <h3 id="total-orders">0</h3>
+          <p>Total Orders</p>
+        </div>
+
+        <div class="stat-card">
+          <h3 id="total-spent">$0.00</h3>
+          <p>Total Spent</p>
+        </div>
+      </div>
+
+      <div id="orders-container"></div>
+    </section>
+
+    <!-- =========================
+     AUTH MODAL
+========================= -->
+
+    <div class="auth-overlay" id="auth-overlay">
+      <div class="auth-modal">
+        <!-- CLOSE BUTTON -->
+
+        <button class="auth-close" id="auth-close">&times;</button>
+
+        <!-- HEADER -->
+
+        <div class="auth-header">
+          <h2>Dazzle Crystals</h2>
+
+          <p>Welcome back to your crystal collection.</p>
+        </div>
+
+        <!-- TABS -->
+
+        <div class="auth-tabs">
+          <button class="auth-tab active-tab" id="signin-tab">Sign In</button>
+
+          <button class="auth-tab" id="signup-tab">Create Account</button>
+        </div>
+
+        <!-- SIGN IN FORM -->
+
+        <form class="auth-form" id="signin-form">
+          <input
+            type="email"
+            id="signin-email"
+            placeholder="Email Address"
+            required
+          />
+
+          <input
+            type="password"
+            id="signin-password"
+            placeholder="Password"
+            required
+          />
+
+          <button type="submit" class="auth-submit-btn">Sign In</button>
+        </form>
+
+        <!-- SIGN UP FORM -->
+
+        <form class="auth-form hidden-form" id="signup-form">
+          <input
+            type="text"
+            id="signup-firstname"
+            placeholder="First Name"
+            required
+          />
+
+          <input
+            type="text"
+            id="signup-lastname"
+            placeholder="Last Name"
+            required
+          />
+
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="Email Address"
+            required
+          />
+
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="Password"
+            required
+          />
+
+          <input
+            type="password"
+            id="signup-confirm-password"
+            placeholder="Confirm Password"
+            required
+          />
+
+          <button type="submit" class="auth-submit-btn">Create Account</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
