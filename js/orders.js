@@ -76,29 +76,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card.innerHTML = `
 
-    <div class="order-top">
+<div class="order-row">
 
-        <h3>Order #${order.orderId}</h3>
+    <div class="order-info">
 
-        <span>${order.status}</span>
+        <div class="order-top">
+            <h3>Order #${order.orderId}</h3>
+        </div>
+
+        <p class="order-date">
+            Placed on ${order.date}
+        </p>
+
+        <ul class="order-products">
+            ${productNames}
+        </ul>
 
     </div>
 
-    <p>
-        Placed on ${order.date}
-    </p>
+    <div class="order-summary">
 
-    <ul class="order-products">
-        ${productNames}
-    </ul>
+    <div class="order-status-price">
 
-    <h4>
-        Total: $${order.total.toFixed(2)}
-    </h4>
+        <span class="order-status">
+            ${order.status}
+        </span>
+
+        <h4>$${order.total.toFixed(2)}</h4>
+
+    </div>
 
     <button class="download-receipt-btn">
-    Download Receipt
+        Download Receipt
     </button>
+
+</div>
+
+</div>
 
 `;
 
