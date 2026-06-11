@@ -24,6 +24,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const cartDisplay = document.getElementById("cart-count");
+  const searchInput = document.getElementById("search-input");
+
+  if (searchInput) {
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const searchTerm = searchInput.value.trim();
+
+        if (searchTerm !== "") {
+          window.location.href = `shop.html?search=${encodeURIComponent(searchTerm)}`;
+        }
+      }
+    });
+  }
   const resultCount = document.getElementById("result-count");
   const priceCheckboxes = document.querySelectorAll(".price-filter");
   const noResults = document.getElementById("no-results");
@@ -31,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // GET COLLECTION FROM URL
   const params = new URLSearchParams(window.location.search);
   const selectedCollection = params.get("collection");
+  const searchTerm = params.get("search");
 
   // Update count
   function updateCartCount() {
@@ -314,11 +328,26 @@ document.addEventListener("DOMContentLoaded", function () {
         function renderShopProducts() {
           container.innerHTML = "";
 
-          const start = (currentShopPage - 1) * productsPerPage;
+          let filteredProducts = products;
 
+          if (searchTerm) {
+            filteredProducts = products.filter((product) => {
+              return (
+                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                product.collection
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase()) ||
+                product.description
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              );
+            });
+          }
+
+          const start = (currentShopPage - 1) * productsPerPage;
           const end = start + productsPerPage;
 
-          const paginatedProducts = products.slice(start, end);
+          const paginatedProducts = filteredProducts.slice(start, end);
 
           paginatedProducts.forEach((product) => {
             const card = document.createElement("div");
@@ -411,7 +440,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
           });
 
-          renderPagination(products.length);
+          renderPagination(filteredProducts.length);
         }
 
         function renderPagination(totalProducts) {
