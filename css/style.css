@@ -3461,6 +3461,9 @@ nav a {
 
     padding: 0 20px;
 }
+.orders-body {
+    background: #e6e6e6;
+}
 
 /* =========================
    HEADER
@@ -3497,28 +3500,29 @@ nav a {
 
     display: flex;
 
-    gap: 24px;
+    gap: 18px;
 
     margin-bottom: 35px;
-
-    max-width: 600px;
 }
 
 .stat-card {
 
-    flex: 0 0 280px;
-
-    background: #fff;
+    width: 200px;
 
     padding: 24px;
+    box-sizing: border-box;
 
     border-radius: 20px;
 
-    border: 1px solid #ececec;
-
-    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-
     transition: 0.25s ease;
+    background: #fafafa;
+
+    border: 1px solid #d8d8d8;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.08),
+    0 2px 4px rgba(0,0,0,0.04);
+    border-top: 4px solid #b89b5e;
 }
 
 .stat-card:hover {
@@ -3528,7 +3532,7 @@ nav a {
 
 .stat-card h3 {
 
-    font-size: 32px;
+    font-size: 26px;
 
     margin-bottom: 8px;
 
@@ -3563,17 +3567,19 @@ nav a {
 
 .order-card {
 
-    background: #fff;
-
     border-radius: 20px;
 
     padding: 24px;
 
-    border: 1px solid #ececec;
-
-    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-
     transition: 0.25s ease;
+    background: #fafafa;
+
+    border: 1px solid #d8d8d8;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.08),
+    0 2px 4px rgba(0,0,0,0.04);
+    border-top: 4px solid #b89b5e;
 }
 
 .order-card:hover {
@@ -3631,26 +3637,31 @@ nav a {
 
     color: #111;
 
-    font-size: 20px;
+    font-size: 22px;
 
     font-weight: 700;
 }
 
-.order-top span {
+.order-status {
+    display: inline-flex;
+    align-items: center;
 
-    background: #f7f4ec;
+    background: #f5ede0;
+    color: #9c7624;
 
-    color: #8f6c1b;
+    border: 1px solid #e7d7ad;
 
     padding: 8px 16px;
 
-    border-radius: 30px;
+    border-radius: 999px;
 
     font-size: 13px;
-
     font-weight: 600;
-}
 
+    letter-spacing: 0.3px;
+
+    box-shadow: 0 2px 6px rgba(184,155,94,0.12);
+}
 /* =========================
    ORDER DETAILS
 ========================= */
@@ -3663,28 +3674,45 @@ nav a {
 }
 
 .order-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-    color: #222;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
 
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.order-date i {
+    color: #b89b5e;
+    font-size: 13px;
 }
 
 .order-products {
-
-    margin-top: 15px;
-
-    margin-bottom: 15px;
-
-    padding-left: 18px;
-
-    color: #111;
-
-    font-weight: 500;
+    list-style: none;
+    padding-left: 0;
 }
-
 .order-products li {
+    position: relative;
 
-    margin-bottom: 8px;
+    padding-left: 22px;
+
+    margin-bottom: 10px;
+
+    color: #333;
+}
+.order-products li::before {
+    content: "✦";
+
+    position: absolute;
+
+    left: 0;
+
+    color: #b89b5e;
+
+    font-size: 12px;
 }
 
 /* =========================

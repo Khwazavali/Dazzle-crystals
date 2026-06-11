@@ -85,7 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
 
         <p class="order-date">
-            Placed on ${order.date}
+            <i class="fa-regular fa-calendar"></i>
+            ${order.date}
         </p>
 
         <ul class="order-products">
@@ -122,8 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
     receiptBtn.addEventListener("click", () => {
       generateReceipt(order);
     });
-
-    function generateReceipt(order) {
+  });
+      function generateReceipt(order) {
       const { jsPDF } = window.jspdf;
 
       const doc = new jsPDF();
@@ -373,5 +374,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
       logo.src = "images/ReceiptLogo.png";
     }
-  });
 });
