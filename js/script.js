@@ -228,6 +228,10 @@ document.addEventListener("DOMContentLoaded", function () {
           card.setAttribute("data-collection", product.collection);
 
           card.innerHTML = `
+    <div class="wishlist-icon">
+        <i class="fa-regular fa-heart"></i>
+    </div>
+
     ${
       product.image
         ? `
@@ -255,6 +259,49 @@ document.addEventListener("DOMContentLoaded", function () {
 `;
 
           container.appendChild(card);
+          const wishlistIcon = card.querySelector(".wishlist-icon i");
+
+          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+          const wishlistKey = currentUser
+            ? `wishlist_${currentUser.email}`
+            : "wishlist_guest";
+
+          let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+          const alreadyWishlisted = wishlist.some(
+            (item) => item.id === product.id,
+          );
+
+          if (alreadyWishlisted) {
+            wishlistIcon.classList.remove("fa-regular");
+            wishlistIcon.classList.add("fa-solid");
+          }
+
+          wishlistIcon.addEventListener("click", () => {
+            let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+            const exists = wishlist.some((item) => item.id === product.id);
+
+            if (exists) {
+              wishlist = wishlist.filter((item) => item.id !== product.id);
+
+              wishlistIcon.classList.remove("fa-solid");
+              wishlistIcon.classList.add("fa-regular");
+            } else {
+              wishlist.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+              });
+
+              wishlistIcon.classList.remove("fa-regular");
+              wishlistIcon.classList.add("fa-solid");
+            }
+
+            localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+          });
 
           const button = card.querySelector("button");
           if (isItemInCart(product.id)) {
@@ -357,6 +404,10 @@ document.addEventListener("DOMContentLoaded", function () {
             card.setAttribute("data-collection", product.collection);
 
             card.innerHTML = `
+    <div class="wishlist-icon">
+        <i class="fa-regular fa-heart"></i>
+    </div>
+
     <a href="product.html?id=${product.id}">
         <img src="${product.image}" alt="${product.name}">
     </a>
@@ -378,6 +429,50 @@ document.addEventListener("DOMContentLoaded", function () {
 `;
 
             container.appendChild(card);
+            const wishlistIcon = card.querySelector(".wishlist-icon i");
+
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+            const wishlistKey = currentUser
+              ? `wishlist_${currentUser.email}`
+              : "wishlist_guest";
+
+            let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+            const alreadyWishlisted = wishlist.some(
+              (item) => item.id === product.id,
+            );
+
+            if (alreadyWishlisted) {
+              wishlistIcon.classList.remove("fa-regular");
+              wishlistIcon.classList.add("fa-solid");
+            }
+
+            wishlistIcon.addEventListener("click", () => {
+              let wishlist =
+                JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+              const exists = wishlist.some((item) => item.id === product.id);
+
+              if (exists) {
+                wishlist = wishlist.filter((item) => item.id !== product.id);
+
+                wishlistIcon.classList.remove("fa-solid");
+                wishlistIcon.classList.add("fa-regular");
+              } else {
+                wishlist.push({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                });
+
+                wishlistIcon.classList.remove("fa-regular");
+                wishlistIcon.classList.add("fa-solid");
+              }
+
+              localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+            });
 
             const button = card.querySelector("button");
 

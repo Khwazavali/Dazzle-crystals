@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Product Details</title>
+    <title>Wishlist</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -13,25 +13,19 @@
     />
   </head>
 
-  <body>
-    <!-- NAVBAR -->
-
+  <body class="orders-body">
     <header class="navbar">
       <div class="logo">
         <img src="images/Logo.svg" alt="Dazzle Crystals Logo" />
       </div>
 
       <nav>
-        <a href="index.html">Home</a>
-        <a href="shop.html">Products</a>
+        <a href="index.html#home">Home</a>
+        <a href="index.html#products">Products</a>
         <a href="index.html#contact">Contact</a>
       </nav>
 
       <div class="nav-right">
-        <button class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
         <div class="search-bar">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input
@@ -50,6 +44,7 @@
         <div class="account-dropdown" id="account-dropdown">
           <a href="#">
             <i class="fa-regular fa-user"></i>
+
             <span>My Account</span>
           </a>
 
@@ -69,133 +64,24 @@
           </button>
         </div>
 
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+
         <a href="cart.html" class="cart">
           <i class="fa-solid fa-cart-shopping"></i>
           <span id="cart-count">0</span>
         </a>
+
+        <div id="cart-message" class="cart-message"></div>
       </div>
     </header>
 
-    <!-- PRODUCT SECTION -->
-
-    <section class="product-detail">
-      <!-- LEFT -->
-
-      <div class="product-gallery">
-        <div class="main-image">
-          <img id="main-product-image" src="" alt="" />
-        </div>
-
-        <div class="thumbnail-row" id="thumbnail-row"></div>
+    <section class="orders-page">
+      <div class="orders-header">
+        <h1>My Wishlist</h1>
       </div>
 
-      <!-- RIGHT -->
-
-      <div class="product-info">
-        <h1 id="product-name"></h1>
-
-        <p class="product-price" id="product-price"></p>
-
-        <div class="product-description">
-          <p id="product-description"></p>
-        </div>
-
-        <div class="product-meta">
-          <div class="meta-block">
-            <h4>Dimensions</h4>
-            <p id="product-dimensions"></p>
-          </div>
-
-          <div class="meta-block">
-            <h4>Weight</h4>
-            <p id="product-weight"></p>
-          </div>
-
-          <div class="meta-block">
-            <h4>Material</h4>
-            <p id="product-material"></p>
-          </div>
-        </div>
-
-        <button class="detail-add-cart" id="detail-add-cart">
-          Add to Cart
-        </button>
-      </div>
+      <div class="product-grid" id="wishlist-container"></div>
     </section>
-
-    <!-- RELATED PRODUCTS -->
-
-    <section class="related-products">
-      <h2>You May Also Like</h2>
-
-      <div class="products-wrapper">
-        <button class="nav-btn left" id="related-prev-btn">←</button>
-
-        <div class="product-grid" id="related-products-container"></div>
-
-        <button class="nav-btn right" id="related-next-btn">→</button>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-      <div class="footer-container">
-        <!-- LEFT -->
-        <div class="footer-brand">
-          <h3>Dazzle Crystals</h3>
-
-          <p>
-            Curated crystal artistry inspired by luxury, nature, and timeless
-            elegance.
-          </p>
-        </div>
-
-        <!-- CENTER -->
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-
-          <a href="index.html">Home</a>
-
-          <a href="shop.html">Shop</a>
-
-          <a href="collections.html">Collections</a>
-
-          <a href="contact.html">Contact</a>
-
-          <a href="cart.html">Cart</a>
-        </div>
-
-        <!-- RIGHT -->
-        <div class="footer-contact">
-          <h4>Contact</h4>
-
-          <p>dazzlcrystals@email.com</p>
-
-          <p>Dallas, Texas</p>
-
-          <p>+1 (469) 000-0000</p>
-        </div>
-      </div>
-
-      <!-- SOCIAL ICONS -->
-
-      <div class="footer-socials">
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-
-        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-
-        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-      </div>
-
-      <!-- BOTTOM -->
-
-      <div class="footer-bottom">
-        <p>© 2025 Dazzle Crystals. All rights reserved.</p>
-      </div>
-    </footer>
-
-    <script src="js/product.js"></script>
 
     <!-- =========================
      AUTH MODAL
@@ -285,6 +171,9 @@
         </form>
       </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/wishlist.js"></script>
     <script src="js/script.js"></script>
     <script src="js/auth.js"></script>
   </body>
