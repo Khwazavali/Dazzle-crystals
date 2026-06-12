@@ -3936,3 +3936,182 @@ nav a {
 .empty-wishlist .shop-btn:hover {
     background: #222;
 }
+/* =========================
+   ACCOUNT PAGE
+========================= */
+
+.account-card {
+
+    background: #fafafa;
+
+    border: 1px solid #d8d8d8;
+
+    border-top: 4px solid #b89b5e;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.08),
+    0 2px 4px rgba(0,0,0,0.04);
+}
+
+.account-card h2 {
+
+    margin-bottom: 20px;
+}
+
+.account-card p {
+
+    margin-bottom: 12px;
+}
+.profile-btn,
+#save-profile-btn {
+
+    background: #111;
+    color: white;
+
+    border: none;
+
+    padding: 14px 24px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+.profile-btn:hover,
+#save-profile-btn:hover {
+
+    background: #222;
+}
+.profile-btn {
+    margin-top: 20px;
+}
+
+.profile-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 9999;
+}
+.profile-modal {
+
+    position: relative;
+
+    width: 650px;
+
+    max-width: 90%;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    box-shadow: 0 20px 40px rgba(0,0,0,.2);
+}
+
+.profile-modal h2 {
+
+    margin-bottom: 25px;
+
+    text-align: center;
+}
+.profile-close {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 20px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+.profile-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.profile-form input {
+
+    height: 45px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d8d8d8;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+}
+
+#save-profile-btn {
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #111;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+#save-password-btn {
+
+    background: #111;
+    color: white;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+#save-password-btn:hover {
+
+    background: #222;
+}

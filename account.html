@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>My Orders</title>
+    <title>Wishlist</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -44,25 +44,21 @@
         <div class="account-dropdown" id="account-dropdown">
           <a href="account.html">
             <i class="fa-regular fa-user"></i>
-
             <span>My Account</span>
           </a>
 
           <a href="wishlist.html">
             <i class="fa-regular fa-heart"></i>
-
             <span>Wishlist</span>
           </a>
 
           <a href="orders.html">
             <i class="fa-solid fa-box"></i>
-
             <span>Orders</span>
           </a>
 
           <button id="logout-btn">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
-
             <span>Logout</span>
           </button>
         </div>
@@ -80,22 +76,10 @@
 
     <section class="orders-page">
       <div class="orders-header">
-        <h1>My Orders</h1>
+        <h1>My Account</h1>
       </div>
 
-      <div class="orders-stats">
-        <div class="stat-card">
-          <h3 id="total-orders">0</h3>
-          <p>Total Orders</p>
-        </div>
-
-        <div class="stat-card">
-          <h3 id="total-spent">$0.00</h3>
-          <p>Total Spent</p>
-        </div>
-      </div>
-
-      <div id="orders-container"></div>
+      <div id="account-container"></div>
     </section>
 
     <!-- =========================
@@ -187,8 +171,66 @@
       </div>
     </div>
 
+    <!-- EDIT PROFILE MODAL -->
+
+    <div class="profile-overlay" id="profile-overlay">
+      <div class="profile-modal">
+        <button class="profile-close" id="profile-close">&times;</button>
+
+        <h2>Edit Profile</h2>
+
+        <form class="profile-form">
+          <input type="text" id="edit-firstname" placeholder="First Name" />
+
+          <input type="text" id="edit-lastname" placeholder="Last Name" />
+
+          <input type="email" id="edit-email" placeholder="Email" />
+
+          <input type="text" id="edit-phone" placeholder="Phone Number" />
+
+          <input type="text" id="edit-address" placeholder="Address" />
+
+          <input type="text" id="edit-city" placeholder="City" />
+
+          <input type="text" id="edit-state" placeholder="State" />
+
+          <input type="text" id="edit-zipcode" placeholder="Zip Code" />
+
+          <button type="button" id="save-profile-btn">Save Changes</button>
+          <button type="button" id="change-password-btn" class="profile-btn">
+            Change Password
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="profile-overlay" id="password-overlay">
+      <div class="profile-modal">
+        <button class="profile-close" id="password-close">&times;</button>
+
+        <h2>Change Password</h2>
+
+        <div class="profile-form">
+          <input
+            type="password"
+            id="current-password"
+            placeholder="Current Password"
+          />
+
+          <input type="password" id="new-password" placeholder="New Password" />
+
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="Confirm New Password"
+          />
+
+          <button type="button" id="save-password-btn">Update Password</button>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="js/orders.js"></script>
+    <script src="js/account.js"></script>
     <script src="js/script.js"></script>
     <script src="js/auth.js"></script>
   </body>
