@@ -2182,45 +2182,127 @@ nav a {
 .secondary-btn {
     flex: 1;
     padding: 12px;
-    background: white;
-    color: black;
-    border: 1px solid #ccc;
+    background: #fff;
+    color: #b89b5e;
+    border: 2px solid #b89b5e;
     cursor: pointer;
 }
 
 .success-box {
-    text-align: center;
-    max-width: 520px;
-    margin: 40px auto;
-    padding: 40px;
+
+    max-width: 560px;
+
+    margin: 20px auto;
+
+    padding: 35px 40px 25px;
+
     background: white;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    animation: fadeIn 0.5s ease-in-out;
+
+    border-radius: 18px;
+
+    border-top: 4px solid #b89b5e;
+
+    text-align: center;
 }
 
 .success-icon {
     font-size: 50px;
     margin-bottom: 10px;
 }
+.success-icon {
 
-.order-id {
-    margin-top: 6px;
-    font-weight: bold;
-    background: #f5f5f5;
-    padding: 12px 18px;
-    border-radius: 8px;
-    display: inline-block;
-    font-size: 18px;
-    letter-spacing: 0.5px;
+    width: 70px;
+
+    height: 70px;
+
+    margin: 0 auto 18px;
+
+    border: 2px solid #b89b5e;
+
+    border-radius: 50%;
+}
+.success-box h2 {
+
+    margin: 0 0 14px;
+
+    font-size: 40px;
 }
 
+.success-icon i {
+
+    color: #b89b5e;
+    font-size: 32px;
+}
+.secondary-btn i,
+.primary-btn i {
+
+    margin-right: 8px;
+}
+
+.order-id-card {
+
+    display: inline-flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 18px 36px;
+
+    border: 1px solid #b89b5e;
+
+    border-radius: 12px;
+
+    margin-top: 22px;
+
+    margin-bottom: 35px;
+
+    background: rgba(184,155,94,0.04);
+}
+
+.order-id-label {
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    color: #b89b5e;
+}
+
+#order-id {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    color: #111;
+}
 .success-box .primary-btn {
     display: inline-block;
     width: auto;
     padding: 12px 20px;
     margin-top: 20px;
     text-decoration: none;
+}
+.success-box p {
+
+    margin: 0;
+
+    line-height: 1.6;
+}
+.success-subtitle {
+
+    margin-top: -5px;
+
+    margin-bottom: 25px;
+
+    color: #777;
+
+    font-size: 18px;
 }
 
 .success-box {
@@ -2358,7 +2440,7 @@ nav a {
 
     justify-content: center;
 
-    margin-top: 25px;
+    margin-top: 5px;
 }
 
 .success-actions .primary-btn,
@@ -2385,16 +2467,20 @@ nav a {
 }
 
 .success-actions .secondary-btn:hover {
-    background: #f5f5f5;
+    background: #b89b5e;
+    color: white;
 }
 
 .delivery-estimate {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #666;
-    letter-spacing: 0.3px;
-}
 
+    margin-top: 12px;
+
+    margin-bottom: 22px;
+
+    font-size: 18px;
+
+    color: #777;
+}
 /* =========================
    PRODUCT DETAIL PAGE
 ========================= */
@@ -4016,15 +4102,15 @@ nav a {
 
     position: relative;
 
-    width: 650px;
+    width: 600px;
 
     max-width: 90%;
 
-    max-height: 85vh;
+    max-height: 95vh;
 
     overflow-y: auto;
 
-    padding: 25px;
+    padding: 20px;
 
     border-radius: 20px;
 
@@ -4035,7 +4121,7 @@ nav a {
 
 .profile-modal h2 {
 
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 
     text-align: center;
 }
@@ -4061,12 +4147,12 @@ nav a {
 
     flex-direction: column;
 
-    gap: 10px;
+    gap: 8px;
 }
 
 .profile-form input {
 
-    height: 45px;
+    height: 40px;
 
     padding: 0 14px;
 
