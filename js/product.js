@@ -165,6 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
           card.innerHTML = `
 
+      <div class="wishlist-icon">
+        <i class="fa-regular fa-heart"></i>
+      </div>
+
       <a href="product.html?id=${item.id}">
           <img src="${item.image}" alt="${item.name}">
       </a>
@@ -183,12 +187,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
           relatedContainer.appendChild(card);
 
-          const relatedAddBtn = card.querySelector(".related-add-cart");
+          const wishlistBtn = card.querySelector(".wishlist-icon");
 
           const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-          const cartKey = currentUser
-            ? `cart_${currentUser.email}`
+          const wishlistKey = currentUser
+            ? `wishlist_${currentUser.email}`
+            : "wishlist_guest";
+
+          let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+          const inWishlist = wishlist.some(
+            (wishlistItem) => wishlistItem.id === item.id,
+          );
+
+          if (inWishlist) {
+            wishlistBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+          }
+
+          wishlistBtn.addEventListener("click", () => {
+            let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+            const exists = wishlist.some(
+              (wishlistItem) => wishlistItem.id === item.id,
+            );
+
+            if (exists) {
+              wishlist = wishlist.filter(
+                (wishlistItem) => wishlistItem.id !== item.id,
+              );
+
+              wishlistBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+            } else {
+              wishlist.push(item);
+
+              wishlistBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            }
+
+            localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+          });
+
+          const relatedAddBtn = card.querySelector(".related-add-cart");
+
+          const cartUser = JSON.parse(localStorage.getItem("currentUser"));
+
+          const cartKey = cartUser
+            ? `cart_${cartUser.email}`
             : "cart_guest";
 
           let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
