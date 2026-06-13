@@ -1286,7 +1286,7 @@ body {
     height: 36px;
     font-size: 12px;
 }
-.signin-btn span {
+.signin-btn:not(.logged-in) span {
     display: none;
 }
 
@@ -1385,6 +1385,14 @@ body {
 
     gap: 4px;
 }
+.mobile-bottom-nav a.active {
+    color: #d4af37;
+}
+
+.mobile-bottom-nav a.active i {
+    color: #d4af37;
+    transform: scale(1.1);
+}
 
 .mobile-bottom-nav i {
     font-size: 18px;
@@ -1434,6 +1442,14 @@ body {
     top: -6px;
     right: -8px;
 }
+.profile-modal {
+
+        width: 92%;
+
+        max-height: 85vh;
+
+        padding: 18px;
+    }
 
 /* hide nav initially */
 nav {
