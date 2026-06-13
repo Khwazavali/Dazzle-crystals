@@ -4,6 +4,34 @@ document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.getElementById("menu-toggle");
   const nav = document.querySelector("nav");
 
+  const mobileSearchToggle = document.getElementById("mobile-search-toggle");
+
+  const mobileSearchPanel = document.getElementById("mobile-search-panel");
+
+  if (mobileSearchToggle && mobileSearchPanel) {
+    mobileSearchToggle.addEventListener("click", () => {
+      mobileSearchPanel.classList.toggle("active");
+
+      if (mobileSearchPanel.classList.contains("active")) {
+        mobileSearchInput.focus();
+      }
+    });
+  }
+
+  const mobileSearchInput = document.getElementById("mobile-search-input");
+
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const searchTerm = mobileSearchInput.value.trim();
+
+        if (searchTerm !== "") {
+          window.location.href = `shop.html?search=${encodeURIComponent(searchTerm)}`;
+        }
+      }
+    });
+  }
+
   if (menuToggle) {
     menuToggle.addEventListener("click", () => {
       nav.classList.toggle("active");
@@ -24,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const cartDisplay = document.getElementById("cart-count");
+  const mobileCartDisplay = document.getElementById("mobile-cart-count");
   const searchInput = document.getElementById("search-input");
 
   if (searchInput) {
@@ -50,6 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateCartCount() {
     if (cartDisplay) {
       cartDisplay.textContent = cart.length;
+    }
+
+    if (mobileCartDisplay) {
+      mobileCartDisplay.textContent = cart.length;
     }
   }
 

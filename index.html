@@ -24,7 +24,7 @@
 
       <div class="nav-right">
         <div class="search-bar">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-solid fa-magnifying-glass" id="mobile-search-toggle"></i>
           <input
             type="text"
             id="search-input"
@@ -60,7 +60,9 @@
           </button>
         </div>
 
-        <button class="menu-toggle" id="menu-toggle">☰</button>
+        <button class="menu-toggle" id="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
 
         <a href="cart.html" class="cart">
           <i class="fa-solid fa-cart-shopping"></i>
@@ -70,6 +72,13 @@
         <div id="cart-message" class="cart-message"></div>
       </div>
     </header>
+    <div class="mobile-search-panel" id="mobile-search-panel">
+      <input
+        type="text"
+        id="mobile-search-input"
+        placeholder="Search crystals..."
+      />
+    </div>
 
     <section id="home" class="hero">
       <div class="hero-text">
@@ -236,6 +245,37 @@
         <p>© 2025 Dazzle Crystals. All rights reserved.</p>
       </div>
     </footer>
+
+    <div class="mobile-bottom-nav">
+      <a href="index.html">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <a href="shop.html">
+        <i class="fa-solid fa-store"></i>
+        <span>Shop</span>
+      </a>
+
+      <a href="wishlist.html">
+        <i class="fa-regular fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+
+      <a href="cart.html" class="mobile-cart-link">
+        <div class="mobile-cart-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="mobile-cart-count">0</span>
+        </div>
+
+        <span>Cart</span>
+      </a>
+
+      <a href="account.html">
+        <i class="fa-regular fa-user"></i>
+        <span>Account</span>
+      </a>
+    </div>
 
     <script src="js/script.js?v=2"></script>
 
