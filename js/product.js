@@ -121,6 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
         addCartBtn.textContent = "✔ Added to Cart";
 
         document.getElementById("cart-count").textContent = cart.length;
+
+        const mobileCartCount = document.getElementById("mobile-cart-count");
+
+        if (mobileCartCount) {
+          mobileCartCount.textContent = cart.length;
+        }
       });
 
       // =========================
@@ -128,6 +134,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // =========================
 
       document.getElementById("cart-count").textContent = cart.length;
+
+      const mobileCartCount = document.getElementById("mobile-cart-count");
+
+      if (mobileCartCount) {
+        mobileCartCount.textContent = cart.length;
+      }
 
       // =========================
       // RELATED PRODUCTS
@@ -231,9 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const cartUser = JSON.parse(localStorage.getItem("currentUser"));
 
-          const cartKey = cartUser
-            ? `cart_${cartUser.email}`
-            : "cart_guest";
+          const cartKey = cartUser ? `cart_${cartUser.email}` : "cart_guest";
 
           let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
@@ -279,6 +289,13 @@ document.addEventListener("DOMContentLoaded", () => {
             relatedAddBtn.textContent = "✔ Added";
 
             document.getElementById("cart-count").textContent = cart.length;
+
+            const mobileCartCount =
+              document.getElementById("mobile-cart-count");
+
+            if (mobileCartCount) {
+              mobileCartCount.textContent = cart.length;
+            }
           });
         });
 
