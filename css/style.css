@@ -230,16 +230,15 @@ nav {
 
     width: 205px;
 
-    background: rgba(255,255,255,0.08);
+    
+    background:rgba(255,255,255,0.92);
 
-    backdrop-filter: blur(20px);
+    backdrop-filter:blur(12px);
 
-    -webkit-backdrop-filter: blur(20px);
+    border:1px solid rgba(255,255,255,0.7);
 
-    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow:0 12px 35px rgba(0,0,0,0.12);
 
-    box-shadow:
-        0 8px 32px rgba(0,0,0,0.35);
 
     border-radius: 18px;
 
@@ -301,9 +300,9 @@ nav {
 
     font-weight: 500;
 
-    color: white;
+    color: #222;
 
-    text-decoration: none;
+    text-decoration: none !important;
 
     cursor: pointer;
 
@@ -326,9 +325,14 @@ nav {
 .account-dropdown a:hover,
 .account-dropdown button:hover {
 
-    background: rgba(255,255,255,0.08);
-}
+    background: rgba(0,0,0,0.1);
 
+    border-radius: 10px;
+    
+}
+.account-dropdown a::after{
+    display:none !important;
+}
 /* LOGOUT */
 
 #logout-btn {
@@ -1093,6 +1097,34 @@ body {
 
     top: 58px;
 }
+.account-section {
+
+    padding: 18px;
+
+    border-radius: 14px;
+}
+
+.account-section span {
+
+    font-size: 16px;
+}
+.section-header {
+
+    padding: 18px;
+
+    font-size: 16px;
+}
+
+.section-arrow {
+
+    font-size: 18px;
+}
+
+.section-content {
+
+    padding: 0 18px 18px;
+    overflow: hidden;
+}
 
     .products {
     padding: 10px 0 30px;
@@ -1284,17 +1316,18 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 14px;
+    padding: 14px 16px;
 
     height: 58px;
+    min-height: 72px;
 
     position: relative;
     box-sizing: border-box;
     width: 100%;
 }
 .signin-btn.logged-in {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     font-size: 12px;
 }
 .signin-btn:not(.logged-in) span {
@@ -1459,11 +1492,11 @@ body {
 }
 .profile-modal {
 
-        width: 92%;
+        width: 82% !important;
+        max-height: 80vh;
+        overflow-y: auto;
 
-        max-height: 85vh;
-
-        padding: 18px;
+        padding: 24px 20px;
     }
 
 /* hide nav initially */
@@ -1589,7 +1622,7 @@ nav a {
 
 .search-bar i {
     color: white;
-    font-size: 15px;
+    font-size: 22px;
     margin: 0;
 }
 
@@ -2892,7 +2925,62 @@ nav a {
 
         padding: 30px 20px;
     }
+    .personal-grid{
+    grid-template-columns: 1fr !important;
+}
+.info-item{
+    padding-bottom:18px;
+    width: 100%;
+}
+.info-item p,
+.info-item span,
+.info-item div{
+    word-break: anywhere;
+}
+.profile-btn{
+    width:100%;
+}
+.account-section{
+    padding:20px;
+}
+.account-card{
+    width:100%;
+    max-width:100%;
 
+    margin:0 auto;
+
+    padding:15px;
+    box-sizing:border-box;
+}
+.saved-card{
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+
+    justify-content:space-between;
+    align-items:center;
+    box-sizing: border-box;
+
+    width:100%;
+
+    gap:15px;
+}
+.saved-card-info{
+    flex:1;
+    min-width: 140px;
+}
+.saved-card-info strong{
+    white-space:nowrap;
+}
+.delete-card-btn{
+    flex-shrink:0;
+
+    padding:8px 10px;
+
+    font-size:12px;
+
+    min-width:65px;
+}
     .main-image img {
     width: 100%;
 
@@ -3706,23 +3794,60 @@ nav a {
 
     .auth-modal {
 
-        width: 92%;
+        width: 86%;
 
-        padding: 34px 24px;
+        padding: 24px 20px;
     }
+    .auth-header {
+    margin-bottom: 20px;
+}
+.auth-overlay {
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
+.auth-header h2 {
+    font-size: 18px;
+}
+
+.auth-header p {
+    font-size: 13px;
+}
+
+.auth-tabs {
+    margin-bottom: 20px;
+}
+
+.auth-form {
+    gap: 12px;
+}
+
+.auth-form input {
+    height: 46px;
+    font-size: 14px;
+}
+
+.auth-submit-btn {
+    height: 46px;
+    font-size: 14px;
+}
+
+.auth-close {
+    width: 32px;
+    height: 32px;
+}
 }
 
 /* =========================
    ORDERS PAGE
 ========================= */
 
-.orders-page {
-
-    width: min(1600px, 95vw);
-
-    margin: 60px auto;
-
-    padding: 0 20px;
+.orders-page{
+    width:100%;
+    max-width:1600px;
+    margin:60px auto;
+    padding:0 20px;
+    box-sizing:border-box;
 }
 .orders-body {
     background: #e6e6e6;
@@ -4220,7 +4345,81 @@ nav a {
     0 8px 20px rgba(0,0,0,0.08),
     0 2px 4px rgba(0,0,0,0.04);
 }
+.account-avatar {
 
+    width: 80px;
+
+    height: 80px;
+
+    border-radius: 50%;
+
+    background: #b89b5e;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.account-name {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    font-size: 28px;
+}
+
+.account-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.info-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    padding-bottom: 14px;
+
+    border-bottom: 1px solid #ececec;
+}
+
+.info-item strong {
+
+    color: #777;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.info-item span {
+
+    color: #111;
+
+    font-size: 16px;
+}
 .account-card h2 {
 
     margin-bottom: 20px;
@@ -4229,6 +4428,49 @@ nav a {
 .account-card p {
 
     margin-bottom: 12px;
+}
+.account-section {
+
+    display: block;
+
+    gap: 16px;
+
+    padding: 22px;
+
+    margin-bottom: 18px;
+
+    border-radius: 16px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.account-section:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.account-section i {
+
+    font-size: 22px;
+
+    color: #b89b5e;
+}
+
+.account-section span {
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #111;
 }
 .profile-btn,
 #save-profile-btn {
@@ -4247,6 +4489,22 @@ nav a {
     font-weight: 600;
 
     transition: 0.25s ease;
+}
+#save-card-btn {
+
+    background: #0a0a0a;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 14px 24px;
+
+    font-weight: 600;
+
+    cursor: pointer;
 }
 
 .profile-btn:hover,
@@ -4377,3 +4635,102 @@ nav a {
 
     background: #222;
 }
+
+/* ACCOUNT ACCORDION */
+
+.account-section {
+
+    background: #f5f5f5;
+
+    border-radius: 18px;
+
+    margin-bottom: 18px;
+
+    overflow: hidden;
+}
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+    
+}
+
+.section-title i {
+
+    color: #b89b5e;
+}
+
+.section-arrow {
+
+    color: #b89b5e;
+
+    transition: transform 0.3s ease;
+}
+
+.section-arrow.open {
+
+    transform: rotate(180deg);
+}
+
+.section-content {
+
+    display: none;
+
+    padding-top: 28px;
+}
+.personal-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+.saved-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:16px 20px;
+    margin-bottom:15px;
+
+    border:1px solid #e5e5e5;
+    border-radius:12px;
+
+    background:#fff;
+}
+
+.saved-card-info{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.delete-card-btn{
+    background:#c0392b;
+    color:white;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
