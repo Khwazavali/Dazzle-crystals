@@ -1,6 +1,20 @@
 html {
     scroll-behavior: smooth;
 }
+/* Remove mobile tap highlight */
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button,
+input,
+textarea,
+select,
+div {
+    -webkit-tap-highlight-color: transparent;
+}
 
 section {
     scroll-margin-top: 100px;
