@@ -1563,8 +1563,8 @@ nav a {
 }
 
 .nav-btn {
-    width: 24px;
-    height: 24px;
+    width: 42px;
+    height: 42px;
 
     font-size: 10px;
 
@@ -1602,7 +1602,13 @@ nav a {
 .nav-btn:active {
     transform: scale(0.92);
 }
+.related-products .nav-btn.left {
+    left: 5px;
+}
 
+.related-products .nav-btn.right {
+    right: 5px;
+}
 .search-bar {
     width: auto;
     height: auto;
@@ -1660,7 +1666,12 @@ nav a {
 }
 
 .related-products .product-grid {
+    display: grid;
     grid-template-columns: 1fr;
+    justify-items: center;
+}
+.related-products .product-card {
+    width: 80%;
 }
 
 
@@ -2901,15 +2912,39 @@ nav a {
 /* RELATED PRODUCTS */
 
 .related-products {
-    padding: 0px 8% 80px;
-
-    background: #f3f3f3;
+    padding: 20px 40px 80px;
+    background: #e6e6e6;
 }
 
 .related-products h2 {
-    font-size: 28px;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-    margin-bottom: 28px;
+.related-products h2::before,
+.related-products h2::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 120px;
+    height: 1px;
+    background: #bdbdbd;
+}
+
+.related-products h2::before {
+    right: 100%;
+    margin-right: 20px;
+}
+
+.related-products h2::after {
+    left: 100%;
+    margin-left: 20px;
 }
 
 /* =========================
@@ -3064,42 +3099,12 @@ nav a {
 .product-link h3:hover {
     color: #a68d2d;
 }
-
-.related-products .product-grid {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 35px;
-
-    margin-top: 20px;
-}
-
-.related-products .product-card img {
-    height: 220px;
-
-    object-fit: contain;
-
-    background: white;
-}
 /* ================= RELATED PRODUCTS ARROWS ================= */
 
 .related-products .products-wrapper {
     position: relative;
+    padding: 0 40px;
 }
-
-.related-products .nav-btn.left {
-    left: -55px;
-}
-
-.related-products .nav-btn.right {
-    right: -55px;
-}
-
-.related-products .nav-btn {
-    top: 52%;
-}
-
 /* =========================
    CONTACT PAGE HERO
 ========================= */

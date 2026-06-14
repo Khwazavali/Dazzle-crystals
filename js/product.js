@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let currentPage = 0;
 
-      const itemsPerPage = 4;
+      const itemsPerPage = window.innerWidth <= 600 ? 1 : 4;
 
       const totalPages = Math.ceil(relatedProducts.length / itemsPerPage);
 
