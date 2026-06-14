@@ -3507,24 +3507,68 @@ nav a {
 
         flex-direction: column;
 
-        gap: 60px;
+        gap: 50px;
+        order: initial;
+        padding: 40px 20px 70px;
     }
 
     .contact-info,
     .contact-form-box {
 
         width: 100%;
+
+        box-sizing: border-box;
+    }
+    .contact-form-box {
+    order: 1;
+}
+
+.contact-info {
+    order: 2;
+}
+
+    .contact-form-box {
+
+        padding: 25px;
+
+        margin: 0 auto;
     }
 
     .form-row {
 
         flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .contact-hero {
+
+        padding: 50px 20px 35px;
     }
 
     .contact-hero h1 {
 
-        font-size: 40px;
+        font-size: 32px;
+
+        line-height: 1.2;
+
+        letter-spacing: 1px;
     }
+
+    .contact-text {
+
+        font-size: 15px;
+
+        line-height: 1.8;
+    }
+    .info-box i {
+
+    width: 46px;
+
+    height: 46px;
+
+    font-size: 14px;
+}
 }
 
 /* =========================
