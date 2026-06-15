@@ -1926,6 +1926,95 @@ nav a {
 
     border: none;
 }
+/* =========================
+   MOBILE CART PAGE
+========================= */
+
+.cart-page {
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 20px;
+}
+
+.cart-left,
+.cart-right {
+    width: 100%;
+    flex: unset;
+}
+
+.cart-right {
+    position: static;
+    box-sizing: border-box;
+}
+.cart-left .product-card {
+    width: 90%;
+    margin: 0 auto 12px;
+}
+
+.cart-left h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cart-item-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.cart-item-content img {
+    width: 75px;
+    height: 75px;
+    flex-shrink: 0;
+}
+
+.cart-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-card {
+    padding: 10px;
+}
+
+.cart-title {
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+.cart-price {
+    font-size: 16px !important;
+    margin-top: 5px;
+}
+
+.cart-delete button {
+    width: 38px;
+    height: 38px;
+}
+
+.continue-shopping {
+    margin-left: 0;
+    margin-top: 20px;
+}
+
+.coupon-box {
+    flex-direction: column;
+}
+
+.apply-btn {
+    width: 100%;
+}
+
+.checkout-btn {
+    width: 100%;
+}
+.cart-title {
+    font-size: 20px;
+    white-space: nowrap;
+}
 
 
 }
