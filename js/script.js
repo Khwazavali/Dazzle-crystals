@@ -230,6 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // LOAD PRODUCTS
       loadProducts()
   .then((products) => {
+
       let currentPage = 0;
       const itemsPerPage = window.innerWidth <= 600 ? 1 : 4;
       let totalPages = 0;
@@ -408,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const productsPerPage = 8;
 
         function renderShopProducts() {
+          
           container.innerHTML = "";
 
           let filteredProducts = products;
@@ -432,6 +434,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const paginatedProducts = filteredProducts.slice(start, end);
 
           paginatedProducts.forEach((product) => {
+            
             const card = document.createElement("div");
 
             card.classList.add("product-card");
