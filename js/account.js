@@ -1,3 +1,11 @@
+import { db } from "./firebase.js";
+
+import {
+  doc,
+  updateDoc,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("account-container");
 
@@ -244,28 +252,49 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const saveBtn = document.getElementById("save-profile-btn");
 
-  saveBtn.addEventListener("click", () => {
-    currentUser.firstName = document.getElementById("edit-firstname").value;
+  saveBtn.addEventListener("click", async () => {
+  currentUser.firstName = document.getElementById("edit-firstname").value;
 
-    currentUser.lastName = document.getElementById("edit-lastname").value;
+  currentUser.lastName = document.getElementById("edit-lastname").value;
 
-    currentUser.email = document.getElementById("edit-email").value;
+  currentUser.email = document.getElementById("edit-email").value;
 
-    currentUser.phone = document.getElementById("edit-phone").value;
+  currentUser.phone = document.getElementById("edit-phone").value;
 
-    currentUser.address = document.getElementById("edit-address").value;
+  currentUser.address = document.getElementById("edit-address").value;
 
-    currentUser.city = document.getElementById("edit-city").value;
+  currentUser.city = document.getElementById("edit-city").value;
 
-    currentUser.state = document.getElementById("edit-state").value;
+  currentUser.state = document.getElementById("edit-state").value;
 
-    currentUser.zipcode = document.getElementById("edit-zipcode").value;
+  currentUser.zipcode = document.getElementById("edit-zipcode").value;
+
+  try {
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+      email: currentUser.email,
+      phone: currentUser.phone,
+      address: currentUser.address,
+      city: currentUser.city,
+      state: currentUser.state,
+      zipcode: currentUser.zipcode,
+    });
 
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+    alert("Profile updated successfully");
+
     profileOverlay.style.display = "none";
 
     location.reload();
-  });
+  } catch (error) {
+    console.error(error);
+
+    alert("Error saving profile");
+  }
+});
+
   const changePasswordBtn = document.getElementById("change-password-btn");
 
   const passwordOverlay = document.getElementById("password-overlay");
