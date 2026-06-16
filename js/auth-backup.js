@@ -1,18 +1,3 @@
-import { auth, db } from "./firebase.js";
-
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-
-import {
-  doc,
-  setDoc,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
 // =========================
 // AUTH MODAL OPEN/CLOSE
 // =========================
@@ -97,8 +82,10 @@ signupTab.addEventListener("click", () => {
 
 const signupFormElement = document.getElementById("signup-form");
 
-signupFormElement.addEventListener("submit", async (e) => {
+signupFormElement.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  // GET INPUT VALUES
 
   const firstName = document.getElementById("signup-firstname").value;
 
@@ -112,35 +99,57 @@ signupFormElement.addEventListener("submit", async (e) => {
     "signup-confirm-password",
   ).value;
 
+  // PASSWORD MATCH CHECK
+
   if (password !== confirmPassword) {
     alert("Passwords do not match");
+
     return;
   }
 
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+  // GET EXISTING USERS
 
-    const firebaseUser = userCredential.user;
+  let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    await setDoc(doc(db, "users", firebaseUser.uid), {
-      firstName,
-      lastName,
-      email,
-      createdAt: new Date().toISOString(),
-    });
+  // CHECK DUPLICATE EMAIL
 
-    alert("Account created successfully");
+  const existingUser = users.find((user) => user.email === email);
 
-    signupFormElement.reset();
+  if (existingUser) {
+    alert("Account already exists");
 
-    signinTab.click();
-  } catch (error) {
-    alert(error.message);
+    return;
   }
+
+  // CREATE USER OBJECT
+
+  const newUser = {
+    firstName,
+
+    lastName,
+
+    email,
+
+    password,
+  };
+
+  // SAVE USER
+
+  users.push(newUser);
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  // SUCCESS
+
+  alert("Account created successfully");
+
+  // RESET FORM
+
+  signupFormElement.reset();
+
+  // SWITCH TO SIGN IN TAB
+
+  signinTab.click();
 });
 
 // =========================
@@ -149,72 +158,79 @@ signupFormElement.addEventListener("submit", async (e) => {
 
 const signinFormElement = document.getElementById("signin-form");
 
-signinFormElement.addEventListener("submit", async (e) => {
+signinFormElement.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  // GET INPUT VALUES
 
   const email = document.getElementById("signin-email").value;
 
   const password = document.getElementById("signin-password").value;
 
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+  // GET USERS
 
-    const firebaseUser = userCredential.user;
+  const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    const currentUser = {
-      uid: firebaseUser.uid,
-      email: firebaseUser.email,
-    };
+  // FIND MATCHING USER
 
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  const matchedUser = users.find((user) => {
+    return user.email === email && user.password === password;
+  });
 
-    alert("Welcome back!");
+  // INVALID LOGIN
 
-    signinFormElement.reset();
-
-    authOverlay.classList.remove("show-auth");
-
-    location.reload();
-  } catch (error) {
+  if (!matchedUser) {
     alert("Invalid email or password");
+
+    return;
   }
+
+  // SAVE CURRENT USER
+
+  localStorage.setItem("currentUser", JSON.stringify(matchedUser));
+
+  // SUCCESS
+
+  alert(`Welcome back ${matchedUser.firstName}`);
+
+  // RESET FORM
+
+  signinFormElement.reset();
+
+  // CLOSE MODAL
+
+  authOverlay.classList.remove("show-auth");
+
+  location.reload();
 });
+
+// =========================
+// UPDATED NAVBAR USER STATE
+// =========================
 
 const signinButton = document.getElementById("signin-btn");
 
 const signinText = document.getElementById("signin-text");
 
+// GET CURRENT USER
+
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-if (currentUser && currentUser.uid) {
-  const userRef = doc(db, "users", currentUser.uid);
+// IF USER EXISTS
 
-  getDoc(userRef).then((docSnap) => {
-    if (docSnap.exists()) {
-      const userData = docSnap.data();
+if (currentUser) {
+  // USER INITIALS
 
-      const initials =
-        userData.firstName.charAt(0) +
-        userData.lastName.charAt(0);
+  const initials =
+    currentUser.firstName.charAt(0) + currentUser.lastName.charAt(0);
 
-      signinText.textContent = initials.toUpperCase();
+  // UPDATE TEXT
 
-      signinButton.classList.add("logged-in");
+  signinText.textContent = initials.toUpperCase();
 
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify({
-          ...currentUser,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-        }),
-      );
-    }
-  });
+  // ADD LOGGED IN STYLE
+
+  signinButton.classList.add("logged-in");
 }
 
 // =========================
