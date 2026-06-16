@@ -1,78 +1,93 @@
+import { loadProducts } from "./products-firestore.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
 
   const productId = urlParams.get("id");
 
-  fetch("products.json")
-    .then((response) => response.json())
+  loadProducts().then((products) => {
+    const product = products.find((p) => p.id === productId);
 
-    .then((products) => {
-      const product = products.find((p) => p.id === productId);
+    if (!product) return;
 
-      if (!product) return;
+    // =========================
+    // MAIN PRODUCT INFO
+    // =========================
 
-      // =========================
-      // MAIN PRODUCT INFO
-      // =========================
+    document.getElementById("product-name").textContent = product.name;
 
-      document.getElementById("product-name").textContent = product.name;
+    document.getElementById("product-price").textContent = "$" + product.price;
 
-      document.getElementById("product-price").textContent =
-        "$" + product.price;
+    document.getElementById("product-description").textContent =
+      product.description;
 
-      document.getElementById("product-description").textContent =
-        product.description;
+    document.getElementById("product-dimensions").textContent =
+      product.dimensions;
 
-      document.getElementById("product-dimensions").textContent =
-        product.dimensions;
+    document.getElementById("product-weight").textContent = product.weight;
 
-      document.getElementById("product-weight").textContent = product.weight;
+    document.getElementById("product-material").textContent = product.material;
 
-      document.getElementById("product-material").textContent =
-        product.material;
+    // =========================
+    // MAIN IMAGE
+    // =========================
 
-      // =========================
-      // MAIN IMAGE
-      // =========================
+    const mainImage = document.getElementById("main-product-image");
 
-      const mainImage = document.getElementById("main-product-image");
+    mainImage.src = product.image;
 
-      mainImage.src = product.image;
+    // =========================
+    // THUMBNAILS
+    // =========================
 
-      // =========================
-      // THUMBNAILS
-      // =========================
+    const thumbnailRow = document.getElementById("thumbnail-row");
 
-      const thumbnailRow = document.getElementById("thumbnail-row");
+    const galleryImages =
+      product.gallery && product.gallery.length > 0
+        ? product.gallery
+        : [product.image];
 
-      product.gallery.forEach((image, index) => {
-        const thumb = document.createElement("img");
+    galleryImages.forEach((image, index) => {
+      const thumb = document.createElement("img");
 
-        thumb.src = image;
+      thumb.src = image;
 
-        if (index === 0) {
-          thumb.classList.add("active-thumb");
-        }
+      if (index === 0) {
+        thumb.classList.add("active-thumb");
+      }
 
-        thumb.addEventListener("click", () => {
-          mainImage.src = image;
+      thumb.addEventListener("click", () => {
+        mainImage.src = image;
 
-          document.querySelectorAll(".thumbnail-row img").forEach((img) => {
-            img.classList.remove("active-thumb");
-          });
-
-          thumb.classList.add("active-thumb");
+        document.querySelectorAll(".thumbnail-row img").forEach((img) => {
+          img.classList.remove("active-thumb");
         });
 
-        thumbnailRow.appendChild(thumb);
+        thumb.classList.add("active-thumb");
       });
 
-      // =========================
-      // ADD TO CART
-      // =========================
+      thumbnailRow.appendChild(thumb);
+    });
 
-      const addCartBtn = document.getElementById("detail-add-cart");
+    // =========================
+    // ADD TO CART
+    // =========================
 
+    const addCartBtn = document.getElementById("detail-add-cart");
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
+
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+    const exists = cart.some((item) => item.id === product.id);
+
+    if (exists) {
+      addCartBtn.textContent = "✔ Added";
+    }
+
+    addCartBtn.addEventListener("click", () => {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
       const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
@@ -83,55 +98,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (exists) {
         addCartBtn.textContent = "✔ Added";
+
+        return;
       }
 
-      addCartBtn.addEventListener("click", () => {
-        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      const item = {
+        id: product.id,
 
-        const cartKey = currentUser
-          ? `cart_${currentUser.email}`
-          : "cart_guest";
+        name: product.name,
 
-        let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        price: product.price,
 
-        const exists = cart.some((item) => item.id === product.id);
+        image: product.image,
 
-        if (exists) {
-          addCartBtn.textContent = "✔ Added";
+        link: `product.html?id=${product.id}`,
+      };
 
-          return;
-        }
+      cart.push(item);
 
-        const item = {
-          id: product.id,
+      localStorage.setItem(cartKey, JSON.stringify(cart));
 
-          name: product.name,
-
-          price: product.price,
-
-          image: product.image,
-
-          link: `product.html?id=${product.id}`,
-        };
-
-        cart.push(item);
-
-        localStorage.setItem(cartKey, JSON.stringify(cart));
-
-        addCartBtn.textContent = "✔ Added to Cart";
-
-        document.getElementById("cart-count").textContent = cart.length;
-
-        const mobileCartCount = document.getElementById("mobile-cart-count");
-
-        if (mobileCartCount) {
-          mobileCartCount.textContent = cart.length;
-        }
-      });
-
-      // =========================
-      // CART COUNT
-      // =========================
+      addCartBtn.textContent = "✔ Added to Cart";
 
       document.getElementById("cart-count").textContent = cart.length;
 
@@ -140,42 +127,55 @@ document.addEventListener("DOMContentLoaded", () => {
       if (mobileCartCount) {
         mobileCartCount.textContent = cart.length;
       }
+    });
 
-      // =========================
-      // RELATED PRODUCTS
-      // =========================
+    // =========================
+    // CART COUNT
+    // =========================
 
-      const relatedContainer = document.getElementById(
-        "related-products-container",
-      );
+    document.getElementById("cart-count").textContent = cart.length;
 
-      const nextBtn = document.getElementById("related-next-btn");
+    const mobileCartCount = document.getElementById("mobile-cart-count");
 
-      const prevBtn = document.getElementById("related-prev-btn");
+    if (mobileCartCount) {
+      mobileCartCount.textContent = cart.length;
+    }
 
-      const relatedProducts = products.filter((p) => p.id !== product.id);
+    // =========================
+    // RELATED PRODUCTS
+    // =========================
 
-      let currentPage = 0;
+    const relatedContainer = document.getElementById(
+      "related-products-container",
+    );
 
-      const itemsPerPage = window.innerWidth <= 600 ? 1 : 4;
+    const nextBtn = document.getElementById("related-next-btn");
 
-      const totalPages = Math.ceil(relatedProducts.length / itemsPerPage);
+    const prevBtn = document.getElementById("related-prev-btn");
 
-      function renderRelatedProducts() {
-        const start = currentPage * itemsPerPage;
+    const relatedProducts = products.filter((p) => p.id !== product.id);
 
-        const end = start + itemsPerPage;
+    let currentPage = 0;
 
-        const visibleProducts = relatedProducts.slice(start, end);
+    const itemsPerPage = window.innerWidth <= 600 ? 1 : 4;
 
-        relatedContainer.innerHTML = "";
+    const totalPages = Math.ceil(relatedProducts.length / itemsPerPage);
 
-        visibleProducts.forEach((item) => {
-          const card = document.createElement("div");
+    function renderRelatedProducts() {
+      const start = currentPage * itemsPerPage;
 
-          card.classList.add("product-card");
+      const end = start + itemsPerPage;
 
-          card.innerHTML = `
+      const visibleProducts = relatedProducts.slice(start, end);
+
+      relatedContainer.innerHTML = "";
+
+      visibleProducts.forEach((item) => {
+        const card = document.createElement("div");
+
+        card.classList.add("product-card");
+
+        card.innerHTML = `
 
       <div class="wishlist-icon">
         <i class="fa-regular fa-heart"></i>
@@ -197,53 +197,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
     `;
 
-          relatedContainer.appendChild(card);
+        relatedContainer.appendChild(card);
 
-          const wishlistBtn = card.querySelector(".wishlist-icon");
+        const wishlistBtn = card.querySelector(".wishlist-icon");
 
-          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-          const wishlistKey = currentUser
-            ? `wishlist_${currentUser.email}`
-            : "wishlist_guest";
+        const wishlistKey = currentUser
+          ? `wishlist_${currentUser.email}`
+          : "wishlist_guest";
 
+        let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
+        const inWishlist = wishlist.some(
+          (wishlistItem) => wishlistItem.id === item.id,
+        );
+
+        if (inWishlist) {
+          wishlistBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        }
+
+        wishlistBtn.addEventListener("click", () => {
           let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
 
-          const inWishlist = wishlist.some(
+          const exists = wishlist.some(
             (wishlistItem) => wishlistItem.id === item.id,
           );
 
-          if (inWishlist) {
+          if (exists) {
+            wishlist = wishlist.filter(
+              (wishlistItem) => wishlistItem.id !== item.id,
+            );
+
+            wishlistBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+          } else {
+            wishlist.push(item);
+
             wishlistBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
           }
 
-          wishlistBtn.addEventListener("click", () => {
-            let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+          localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+        });
 
-            const exists = wishlist.some(
-              (wishlistItem) => wishlistItem.id === item.id,
-            );
+        const relatedAddBtn = card.querySelector(".related-add-cart");
 
-            if (exists) {
-              wishlist = wishlist.filter(
-                (wishlistItem) => wishlistItem.id !== item.id,
-              );
+        const cartUser = JSON.parse(localStorage.getItem("currentUser"));
 
-              wishlistBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
-            } else {
-              wishlist.push(item);
+        const cartKey = cartUser ? `cart_${cartUser.email}` : "cart_guest";
 
-              wishlistBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
-            }
+        let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
-            localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
-          });
+        const exists = cart.some((cartItem) => cartItem.id === item.id);
 
-          const relatedAddBtn = card.querySelector(".related-add-cart");
+        if (exists) {
+          relatedAddBtn.textContent = "✔ Added";
+        }
 
-          const cartUser = JSON.parse(localStorage.getItem("currentUser"));
+        relatedAddBtn.addEventListener("click", () => {
+          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-          const cartKey = cartUser ? `cart_${cartUser.email}` : "cart_guest";
+          const cartKey = currentUser
+            ? `cart_${currentUser.email}`
+            : "cart_guest";
 
           let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
@@ -251,75 +266,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (exists) {
             relatedAddBtn.textContent = "✔ Added";
+
+            return;
           }
 
-          relatedAddBtn.addEventListener("click", () => {
-            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+          const cartItem = {
+            id: item.id,
 
-            const cartKey = currentUser
-              ? `cart_${currentUser.email}`
-              : "cart_guest";
+            name: item.name,
 
-            let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+            price: item.price,
 
-            const exists = cart.some((cartItem) => cartItem.id === item.id);
+            image: item.image,
 
-            if (exists) {
-              relatedAddBtn.textContent = "✔ Added";
+            link: `product.html?id=${item.id}`,
+          };
 
-              return;
-            }
+          cart.push(cartItem);
 
-            const cartItem = {
-              id: item.id,
+          localStorage.setItem(cartKey, JSON.stringify(cart));
 
-              name: item.name,
+          relatedAddBtn.textContent = "✔ Added";
 
-              price: item.price,
+          document.getElementById("cart-count").textContent = cart.length;
 
-              image: item.image,
+          const mobileCartCount = document.getElementById("mobile-cart-count");
 
-              link: `product.html?id=${item.id}`,
-            };
-
-            cart.push(cartItem);
-
-            localStorage.setItem(cartKey, JSON.stringify(cart));
-
-            relatedAddBtn.textContent = "✔ Added";
-
-            document.getElementById("cart-count").textContent = cart.length;
-
-            const mobileCartCount =
-              document.getElementById("mobile-cart-count");
-
-            if (mobileCartCount) {
-              mobileCartCount.textContent = cart.length;
-            }
-          });
+          if (mobileCartCount) {
+            mobileCartCount.textContent = cart.length;
+          }
         });
+      });
 
-        prevBtn.disabled = currentPage === 0;
+      prevBtn.disabled = currentPage === 0;
 
-        nextBtn.disabled = currentPage === totalPages - 1;
+      nextBtn.disabled = currentPage === totalPages - 1;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages - 1) {
+        currentPage++;
+
+        renderRelatedProducts();
       }
-
-      nextBtn.addEventListener("click", () => {
-        if (currentPage < totalPages - 1) {
-          currentPage++;
-
-          renderRelatedProducts();
-        }
-      });
-
-      prevBtn.addEventListener("click", () => {
-        if (currentPage > 0) {
-          currentPage--;
-
-          renderRelatedProducts();
-        }
-      });
-
-      renderRelatedProducts();
     });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 0) {
+        currentPage--;
+
+        renderRelatedProducts();
+      }
+    });
+
+    renderRelatedProducts();
+  });
 });
