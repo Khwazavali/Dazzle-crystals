@@ -1,3 +1,6 @@
+import { loadProducts } from "./products-firestore.js";
+
+
 document.addEventListener("DOMContentLoaded", function () {
   // ================= MOBILE MENU =================
 
@@ -225,9 +228,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // LOAD PRODUCTS
-  fetch("products.json")
-    .then((response) => response.json())
-    .then((products) => {
+      loadProducts()
+  .then((products) => {
       let currentPage = 0;
       const itemsPerPage = window.innerWidth <= 600 ? 1 : 4;
       let totalPages = 0;
