@@ -1,12 +1,19 @@
 import { loadProducts } from "./products-firestore.js";
-import { addToCart, removeFromCart } from "./cart-firestore.js";
+import { loadCart, addToCart, removeFromCart } from "./cart-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const urlParams = new URLSearchParams(window.location.search);
 
   const productId = urlParams.get("id");
 
-  loadProducts().then((products) => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  let cart = [];
+
+  function startProductPage() {
+
+    loadProducts().then((products) => {
     const product = products.find((p) => p.id === productId);
 
     if (!product) return;
@@ -76,31 +83,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const addCartBtn = document.getElementById("detail-add-cart");
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        const exists = cart.some((item) => item.id === product.id);
 
-    const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
-
-    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-    const exists = cart.some((item) => item.id === product.id);
-
-    if (exists) {
-      addCartBtn.textContent = "✔ Added";
-    }
-
+        if (exists) {
+          addCartBtn.textContent = "✔ Added";
+        }
     addCartBtn.addEventListener("click", () => {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-      const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
-
-      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
       const exists = cart.some((item) => item.id === product.id);
 
       if (exists) {
         cart = cart.filter((item) => item.id !== product.id);
 
-        localStorage.setItem(cartKey, JSON.stringify(cart));
         if (currentUser?.uid) {
           removeFromCart(currentUser.uid, product.id);
         }
@@ -132,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cart.push(item);
 
-      localStorage.setItem(cartKey, JSON.stringify(cart));
       if (currentUser?.uid) {
         addToCart(currentUser.uid, item);
       }
@@ -259,12 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const relatedAddBtn = card.querySelector(".related-add-cart");
-
-        const cartUser = JSON.parse(localStorage.getItem("currentUser"));
-
-        const cartKey = cartUser ? `cart_${cartUser.email}` : "cart_guest";
-
-        let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        console.log("RELATED CHECK", item.name, cart.length);
 
         const exists = cart.some((cartItem) => cartItem.id === item.id);
 
@@ -273,27 +260,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         relatedAddBtn.addEventListener("click", () => {
-          const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-          const cartKey = currentUser
-            ? `cart_${currentUser.email}`
-            : "cart_guest";
-
-          let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-          const exists = cart.some((cartItem) => cartItem.id === item.id);
+          const exists = cart.some(
+            (cartItem) => cartItem.id === item.id,
+          );
 
           if (exists) {
-            cart = cart.filter((cartItem) => cartItem.id !== item.id);
+            cart = cart.filter(
+              (cartItem) => cartItem.id !== item.id,
+            );
 
-            localStorage.setItem(cartKey, JSON.stringify(cart));
             if (currentUser?.uid) {
               removeFromCart(currentUser.uid, item.id);
             }
 
             relatedAddBtn.textContent = "Add To Cart";
 
-            document.getElementById("cart-count").textContent = cart.length;
+            document.getElementById("cart-count").textContent =
+              cart.length;
 
             const mobileCartCount =
               document.getElementById("mobile-cart-count");
@@ -319,14 +302,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
           cart.push(cartItem);
 
-          localStorage.setItem(cartKey, JSON.stringify(cart));
           if (currentUser?.uid) {
             addToCart(currentUser.uid, cartItem);
           }
 
           relatedAddBtn.textContent = "✔ Added";
 
-          document.getElementById("cart-count").textContent = cart.length;
+          document.getElementById("cart-count").textContent =
+            cart.length;
 
           const mobileCartCount = document.getElementById("mobile-cart-count");
 
@@ -359,4 +342,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderRelatedProducts();
   });
+  }
+  if (currentUser?.uid) {
+  loadCart(currentUser.uid).then((cartItems) => {
+    cart = cartItems;
+
+    startProductPage();
+  });
+} else {
+  startProductPage();
+}
 });
