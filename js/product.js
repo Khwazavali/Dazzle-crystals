@@ -1,4 +1,5 @@
 import { loadProducts } from "./products-firestore.js";
+import { addToCart, removeFromCart } from "./cart-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -100,6 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
         cart = cart.filter((item) => item.id !== product.id);
 
         localStorage.setItem(cartKey, JSON.stringify(cart));
+        if (currentUser?.uid) {
+          removeFromCart(currentUser.uid, product.id);
+        }
 
         addCartBtn.textContent = "Add To Cart";
 
@@ -129,6 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
       cart.push(item);
 
       localStorage.setItem(cartKey, JSON.stringify(cart));
+      if (currentUser?.uid) {
+        addToCart(currentUser.uid, item);
+      }
 
       addCartBtn.textContent = "✔ Added to Cart";
 
@@ -280,6 +287,9 @@ document.addEventListener("DOMContentLoaded", () => {
             cart = cart.filter((cartItem) => cartItem.id !== item.id);
 
             localStorage.setItem(cartKey, JSON.stringify(cart));
+            if (currentUser?.uid) {
+              removeFromCart(currentUser.uid, item.id);
+            }
 
             relatedAddBtn.textContent = "Add To Cart";
 
@@ -310,6 +320,9 @@ document.addEventListener("DOMContentLoaded", () => {
           cart.push(cartItem);
 
           localStorage.setItem(cartKey, JSON.stringify(cart));
+          if (currentUser?.uid) {
+            addToCart(currentUser.uid, cartItem);
+          }
 
           relatedAddBtn.textContent = "✔ Added";
 

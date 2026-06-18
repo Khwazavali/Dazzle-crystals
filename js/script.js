@@ -1,4 +1,5 @@
 import { loadProducts } from "./products-firestore.js";
+import { addToCart, removeFromCart } from "./cart-firestore.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // ================= MOBILE MENU =================
@@ -348,7 +349,9 @@ document.addEventListener("DOMContentLoaded", function () {
               cart = cart.filter((item) => item.id !== product.id);
 
               localStorage.setItem(cartKey, JSON.stringify(cart));
-
+              if (currentUser?.uid) {
+                removeFromCart(currentUser.uid, product.id);
+              }
               updateCartCount();
 
               button.textContent = "Add To Cart";
@@ -367,7 +370,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             cart.push(item);
             localStorage.setItem(cartKey, JSON.stringify(cart));
-
+            if (currentUser?.uid) {
+              addToCart(currentUser.uid, item);
+            }
             updateCartCount();
 
             // ✅ Update button
@@ -514,7 +519,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 cart = cart.filter((item) => item.id !== product.id);
 
                 localStorage.setItem(cartKey, JSON.stringify(cart));
-
+                if (currentUser?.uid) {
+                  removeFromCart(currentUser.uid, product.id);
+                }
                 updateCartCount();
 
                 button.textContent = "Add To Cart";
@@ -537,6 +544,9 @@ document.addEventListener("DOMContentLoaded", function () {
               cart.push(item);
 
               localStorage.setItem(cartKey, JSON.stringify(cart));
+              if (currentUser?.uid) {
+                addToCart(currentUser.uid, item);
+              }
 
               updateCartCount();
 
