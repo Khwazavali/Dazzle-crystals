@@ -1,5 +1,5 @@
 import { loadProducts } from "./products-firestore.js";
-import { addToCart, removeFromCart } from "./cart-firestore.js";
+import { loadCart, addToCart, removeFromCart } from "./cart-firestore.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // ================= MOBILE MENU =================
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
+  let cart = [];
 
-  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+  const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
   function isItemInCart(id) {
     return cart.some((item) => item.id === id);
   }
@@ -89,7 +89,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  updateCartCount();
+  if (currentUser?.uid) {
+    loadCart(currentUser.uid).then((cartItems) => {
+      cart = cartItems;
+
+      updateCartCount();
+    });
+  } else {
+    cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+    updateCartCount();
+  }
 
   // COLLECTION FILTER LOGIC
 
