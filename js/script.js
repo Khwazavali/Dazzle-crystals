@@ -1,6 +1,5 @@
 import { loadProducts } from "./products-firestore.js";
 
-
 document.addEventListener("DOMContentLoaded", function () {
   // ================= MOBILE MENU =================
 
@@ -228,9 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // LOAD PRODUCTS
-      loadProducts()
-  .then((products) => {
-
+  loadProducts()
+    .then((products) => {
       let currentPage = 0;
       const itemsPerPage = window.innerWidth <= 600 ? 1 : 4;
       let totalPages = 0;
@@ -342,22 +340,18 @@ document.addEventListener("DOMContentLoaded", function () {
           const button = card.querySelector("button");
           if (isItemInCart(product.id)) {
             button.textContent = "✔ Added";
-            button.disabled = true;
           }
 
           button.addEventListener("click", () => {
             // 🔴 If already in cart
             if (isItemInCart(product.id)) {
-              const message = document.getElementById("cart-message");
+              cart = cart.filter((item) => item.id !== product.id);
 
-              if (message) {
-                message.textContent = "Already in your cart ✨";
-                message.classList.add("show");
+              localStorage.setItem(cartKey, JSON.stringify(cart));
 
-                setTimeout(() => {
-                  message.classList.remove("show");
-                }, 2000);
-              }
+              updateCartCount();
+
+              button.textContent = "Add To Cart";
 
               return;
             }
@@ -378,7 +372,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // ✅ Update button
             button.textContent = "✔ Added";
-            button.disabled = true;
 
             // ✅ Show message
             const message = document.getElementById("cart-message");
@@ -409,7 +402,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const productsPerPage = 8;
 
         function renderShopProducts() {
-          
           container.innerHTML = "";
 
           let filteredProducts = products;
@@ -434,7 +426,6 @@ document.addEventListener("DOMContentLoaded", function () {
           const paginatedProducts = filteredProducts.slice(start, end);
 
           paginatedProducts.forEach((product) => {
-            
             const card = document.createElement("div");
 
             card.classList.add("product-card");
@@ -516,23 +507,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isItemInCart(product.id)) {
               button.textContent = "✔ Added";
-
-              button.disabled = true;
             }
 
             button.addEventListener("click", () => {
               if (isItemInCart(product.id)) {
-                const message = document.getElementById("cart-message");
+                cart = cart.filter((item) => item.id !== product.id);
 
-                if (message) {
-                  message.textContent = "Already in your cart ✨";
+                localStorage.setItem(cartKey, JSON.stringify(cart));
 
-                  message.classList.add("show");
+                updateCartCount();
 
-                  setTimeout(() => {
-                    message.classList.remove("show");
-                  }, 2000);
-                }
+                button.textContent = "Add To Cart";
 
                 return;
               }
@@ -556,8 +541,6 @@ document.addEventListener("DOMContentLoaded", function () {
               updateCartCount();
 
               button.textContent = "✔ Added";
-
-              button.disabled = true;
 
               const message = document.getElementById("cart-message");
 

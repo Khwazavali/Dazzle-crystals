@@ -97,7 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const exists = cart.some((item) => item.id === product.id);
 
       if (exists) {
-        addCartBtn.textContent = "✔ Added";
+        cart = cart.filter((item) => item.id !== product.id);
+
+        localStorage.setItem(cartKey, JSON.stringify(cart));
+
+        addCartBtn.textContent = "Add To Cart";
+
+        document.getElementById("cart-count").textContent = cart.length;
+
+        const mobileCartCount = document.getElementById("mobile-cart-count");
+
+        if (mobileCartCount) {
+          mobileCartCount.textContent = cart.length;
+        }
 
         return;
       }
@@ -265,7 +277,20 @@ document.addEventListener("DOMContentLoaded", () => {
           const exists = cart.some((cartItem) => cartItem.id === item.id);
 
           if (exists) {
-            relatedAddBtn.textContent = "✔ Added";
+            cart = cart.filter((cartItem) => cartItem.id !== item.id);
+
+            localStorage.setItem(cartKey, JSON.stringify(cart));
+
+            relatedAddBtn.textContent = "Add To Cart";
+
+            document.getElementById("cart-count").textContent = cart.length;
+
+            const mobileCartCount =
+              document.getElementById("mobile-cart-count");
+
+            if (mobileCartCount) {
+              mobileCartCount.textContent = cart.length;
+            }
 
             return;
           }
