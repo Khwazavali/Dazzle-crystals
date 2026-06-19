@@ -40,3 +40,15 @@ export async function removeFromCart(uid, productId) {
     doc(db, "users", uid, "cart", productId),
   );
 }
+
+// CLEAR CART
+
+export async function clearCart(uid) {
+  const cartItems = await loadCart(uid);
+
+  for (const item of cartItems) {
+    await deleteDoc(
+      doc(db, "users", uid, "cart", item.id),
+    );
+  }
+}

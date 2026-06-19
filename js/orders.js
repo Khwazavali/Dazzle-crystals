@@ -1,3 +1,5 @@
+import { loadOrders } from "./orders-firestore.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -27,9 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const ordersKey = `orders_${currentUser.email}`;
-
-  const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+  loadOrders(currentUser.uid).then((orders) => {
 
   if (orders.length === 0) {
     container.innerHTML = `
@@ -374,4 +374,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
       logo.src = "images/ReceiptLogo.png";
     }
+});
 });

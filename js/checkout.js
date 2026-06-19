@@ -1,3 +1,6 @@
+import { addOrder } from "./orders-firestore.js";
+import { clearCart } from "./cart-firestore.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   const name = document.getElementById("name");
   const email = document.getElementById("email");
@@ -188,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const stepIndicator3 = document.getElementById("step-indicator-3");
   const orderIdText = document.getElementById("order-id");
 
-  payBtn.addEventListener("click", function () {
+  payBtn.addEventListener("click", async function () {
     // hide BOTH previous steps
     step1.style.display = "none";
     step2.style.display = "none";
@@ -246,23 +249,25 @@ document.addEventListener("DOMContentLoaded", function () {
       ? `orders_${currentUser.email}`
       : "orders_guest";
 
-    let orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
-
-    orders.push(orderData);
-
-    localStorage.setItem(ordersKey, JSON.stringify(orders));
+    if (currentUser?.uid) {
+      addOrder(currentUser.uid, orderData);
+    }
 
     // clear cart
     localStorage.setItem(cartKey, JSON.stringify([]));
 
     const cartCount = document.getElementById("cart-count");
 
+    if (currentUser?.uid) {
+  await clearCart(currentUser.uid);
+}
+
     if (cartCount) {
       cartCount.textContent = "0";
     }
   });
 
-    // =========================
+  // =========================
   // RECEIPT PDF
   // =========================
 
@@ -368,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
       doc.text(
         `${order.customer.address}, ${order.customer.city}, ${order.customer.state} ${order.customer.zip}`,
         20,
-        112
+        112,
       );
 
       doc.setDrawColor(200);
