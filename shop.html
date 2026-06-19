@@ -131,6 +131,19 @@
         <div class="products-content">
           <h2>Shop Your Crystal</h2>
 
+          <div class="mobile-actions">
+            <button class="filter-toggle" id="open-filters">
+              <i class="fa-solid fa-sliders"></i>
+              Filters
+            </button>
+
+            <select id="mobile-sort">
+              <option value="default">Sort By</option>
+              <option value="low-high">Price: Low to High</option>
+              <option value="high-low">Price: High to Low</option>
+            </select>
+          </div>
+
           <div class="top-bar">
             <p id="result-count">0 Results</p>
 
@@ -325,5 +338,66 @@
     </div>
 
     <script type="module" src="js/auth.js"></script>
+    <div class="filter-overlay" id="filter-overlay">
+      <div class="filter-modal">
+        <div class="filter-header">
+          <h3>Filters</h3>
+
+          <button id="close-filters">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="filter-content">
+          <h4>Price</h4>
+
+          <label>
+            <input type="checkbox" value="0-50" class="price-filter" />
+            Under $50
+          </label>
+
+          <label>
+            <input type="checkbox" value="50-100" class="price-filter" />
+            $50 - $100
+          </label>
+
+          <label>
+            <input type="checkbox" value="100-200" class="price-filter" />
+            Above $100
+          </label>
+
+          <h4>Collections</h4>
+
+          <label>
+            <input type="checkbox" value="wildlife" class="collection-filter" />
+            Wildlife
+          </label>
+
+          <label>
+            <input type="checkbox" value="ocean" class="collection-filter" />
+            Ocean
+          </label>
+
+          <label>
+            <input type="checkbox" value="garden" class="collection-filter" />
+            Garden
+          </label>
+
+          <label>
+            <input type="checkbox" value="fantasy" class="collection-filter" />
+            Fantasy
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              value="celestial"
+              class="collection-filter"
+            />
+            Celestial
+          </label>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

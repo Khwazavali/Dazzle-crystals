@@ -259,11 +259,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartCount = document.getElementById("cart-count");
 
     if (currentUser?.uid) {
-  await clearCart(currentUser.uid);
-}
+      await clearCart(currentUser.uid);
+    }
 
     if (cartCount) {
       cartCount.textContent = "0";
+    }
+
+    const mobileCartCount = document.getElementById("mobile-cart-count");
+
+    if (mobileCartCount) {
+      mobileCartCount.textContent = "0";
     }
   });
 

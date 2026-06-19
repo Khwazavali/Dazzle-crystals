@@ -216,14 +216,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  const sortDropdown = document.getElementById("sort");
+  const desktopSort = document.getElementById("sort");
+  const mobileSort = document.getElementById("mobile-sort");
 
-  if (sortDropdown) {
-    sortDropdown.addEventListener("change", sortProducts);
+  if (desktopSort) {
+    desktopSort.addEventListener("change", sortProducts);
   }
 
-  function sortProducts() {
-    const value = sortDropdown.value;
+  if (mobileSort) {
+    mobileSort.addEventListener("change", sortProducts);
+  }
+
+  function sortProducts(event) {
+    const value = event.target.value;
     const grid = document.querySelector(".product-grid");
     const items = Array.from(document.querySelectorAll(".product-card"));
 
