@@ -1,5 +1,10 @@
 import { loadProducts } from "./products-firestore.js";
 import { loadCart, addToCart, removeFromCart } from "./cart-firestore.js";
+import {
+  loadWishlist,
+  addToWishlist,
+  removeFromWishlist,
+} from "./wishlist-firestore.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // ================= MOBILE MENU =================
@@ -48,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   let cart = [];
+  let wishlist = [];
 
   const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
   function isItemInCart(id) {
@@ -93,9 +99,13 @@ document.addEventListener("DOMContentLoaded", function () {
     loadCart(currentUser.uid).then((cartItems) => {
       cart = cartItems;
 
-      updateCartCount();
+      loadWishlist(currentUser.uid).then((wishlistItems) => {
+        wishlist = wishlistItems;
 
-      startProducts();
+        updateCartCount();
+
+        startProducts();
+      });
     });
   } else {
     cart = JSON.parse(localStorage.getItem(cartKey)) || [];
@@ -313,12 +323,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-            const wishlistKey = currentUser
-              ? `wishlist_${currentUser.email}`
-              : "wishlist_guest";
-
-            let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
-
             const alreadyWishlisted = wishlist.some(
               (item) => item.id === product.id,
             );
@@ -329,29 +333,34 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             wishlistIcon.addEventListener("click", () => {
-              let wishlist =
-                JSON.parse(localStorage.getItem(wishlistKey)) || [];
-
               const exists = wishlist.some((item) => item.id === product.id);
 
               if (exists) {
                 wishlist = wishlist.filter((item) => item.id !== product.id);
 
+                if (currentUser?.uid) {
+                  removeFromWishlist(currentUser.uid, product.id);
+                }
+
                 wishlistIcon.classList.remove("fa-solid");
                 wishlistIcon.classList.add("fa-regular");
               } else {
-                wishlist.push({
+                const wishlistItem = {
                   id: product.id,
                   name: product.name,
                   price: product.price,
                   image: product.image,
-                });
+                };
+
+                wishlist.push(wishlistItem);
 
                 wishlistIcon.classList.remove("fa-regular");
                 wishlistIcon.classList.add("fa-solid");
-              }
 
-              localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+                if (currentUser?.uid) {
+                  addToWishlist(currentUser.uid, wishlistItem);
+                }
+              }
             });
 
             const button = card.querySelector("button");
@@ -487,13 +496,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.getItem("currentUser"),
               );
 
-              const wishlistKey = currentUser
-                ? `wishlist_${currentUser.email}`
-                : "wishlist_guest";
-
-              let wishlist =
-                JSON.parse(localStorage.getItem(wishlistKey)) || [];
-
               const alreadyWishlisted = wishlist.some(
                 (item) => item.id === product.id,
               );
@@ -504,29 +506,34 @@ document.addEventListener("DOMContentLoaded", function () {
               }
 
               wishlistIcon.addEventListener("click", () => {
-                let wishlist =
-                  JSON.parse(localStorage.getItem(wishlistKey)) || [];
-
                 const exists = wishlist.some((item) => item.id === product.id);
 
                 if (exists) {
                   wishlist = wishlist.filter((item) => item.id !== product.id);
 
+                  if (currentUser?.uid) {
+                    removeFromWishlist(currentUser.uid, product.id);
+                  }
+
                   wishlistIcon.classList.remove("fa-solid");
                   wishlistIcon.classList.add("fa-regular");
                 } else {
-                  wishlist.push({
+                  const wishlistItem = {
                     id: product.id,
                     name: product.name,
                     price: product.price,
                     image: product.image,
-                  });
+                  };
+
+                  wishlist.push(wishlistItem);
 
                   wishlistIcon.classList.remove("fa-regular");
                   wishlistIcon.classList.add("fa-solid");
-                }
 
-                localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+                  if (currentUser?.uid) {
+                    addToWishlist(currentUser.uid, wishlistItem);
+                  }
+                }
               });
 
               const button = card.querySelector("button");

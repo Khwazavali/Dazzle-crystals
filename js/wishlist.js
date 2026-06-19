@@ -1,16 +1,26 @@
+import { loadWishlist, removeFromWishlist } from "./wishlist-firestore.js";
+import { addToCart } from "./cart-firestore.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("wishlist-container");
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  const wishlistKey = currentUser
-    ? `wishlist_${currentUser.email}`
-    : "wishlist_guest";
+  let wishlist = [];
 
-  let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+  if (currentUser?.uid) {
+    loadWishlist(currentUser.uid).then((wishlistItems) => {
+      wishlist = wishlistItems;
 
-  if (wishlist.length === 0) {
-    container.innerHTML = `
+      renderWishlist();
+    });
+  } else {
+    renderWishlist();
+  }
+
+  function renderWishlist() {
+    if (wishlist.length === 0) {
+      container.innerHTML = `
             <div class="empty-wishlist">
     <i class="fa-regular fa-heart"></i>
 
@@ -22,15 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
         `;
 
-    return;
-  }
+      return;
+    }
 
-  wishlist.forEach((product) => {
-    const card = document.createElement("div");
+    wishlist.forEach((product) => {
+      const card = document.createElement("div");
 
-    card.classList.add("product-card");
+      card.classList.add("product-card");
 
-    card.innerHTML = `
+      card.innerHTML = `
 
 <a href="product.html?id=${product.id}">
     <img src="${product.image}" alt="${product.name}">
@@ -52,38 +62,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
 `;
 
-    container.appendChild(card);
+      container.appendChild(card);
 
-    // REMOVE
+      // REMOVE
 
-    card.querySelector(".remove-wishlist-btn").addEventListener("click", () => {
-      wishlist = wishlist.filter((item) => item.id !== product.id);
+      card
+        .querySelector(".remove-wishlist-btn")
+        .addEventListener("click", async () => {
+          wishlist = wishlist.filter((item) => item.id !== product.id);
 
-      localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
+          if (currentUser?.uid) {
+            await removeFromWishlist(currentUser.uid, product.id);
+          }
 
-      location.reload();
+          location.reload();
+        });
+
+      // MOVE TO CART
+      card
+        .querySelector(".move-cart-btn")
+        .addEventListener("click", async () => {
+          if (currentUser?.uid) {
+            await addToCart(currentUser.uid, product);
+
+            await removeFromWishlist(currentUser.uid, product.id);
+          }
+
+          location.reload();
+        });
     });
-
-    // MOVE TO CART
-
-    card.querySelector(".move-cart-btn").addEventListener("click", () => {
-      const cartKey = currentUser ? `cart_${currentUser.email}` : "cart_guest";
-
-      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-      const exists = cart.some((item) => item.id === product.id);
-
-      if (!exists) {
-        cart.push(product);
-
-        localStorage.setItem(cartKey, JSON.stringify(cart));
-      }
-
-      wishlist = wishlist.filter((item) => item.id !== product.id);
-
-      localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
-
-      location.reload();
-    });
-  });
+  }
 });
