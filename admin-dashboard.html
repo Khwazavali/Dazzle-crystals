@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Dashboard | Dazzle Crystals</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f6f3ef;
+        color: #222;
+      }
+
+      header {
+        background: #222;
+        color: white;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 22px;
+        margin: 0;
+      }
+
+      button {
+        background: white;
+        color: #222;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 18px;
+        cursor: pointer;
+      }
+
+      main {
+        padding: 30px;
+      }
+
+      .welcome-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      #products-table th,
+      #products-table td {
+        text-align: left;
+        vertical-align: middle;
+        border-color: #e5e5e5;
+      }
+
+      #products-table th {
+        background: #f6f3ef;
+      }
+
+      #products-table img {
+        display: block;
+      }
+
+      #products-table button:hover {
+        opacity: 0.8;
+      }
+      #edit-product-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      #edit-product-form input,
+      #edit-product-form textarea {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font: inherit;
+      }
+
+      #edit-product-form button {
+        background: #222;
+        color: white;
+        margin-right: 10px;
+      }
+
+      #edit-product-section[hidden] {
+        display: none !important;
+      }
+      #add-product-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      #add-product-form input,
+      #add-product-form textarea {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font: inherit;
+      }
+
+      #add-product-button {
+        background: #222;
+        color: white;
+        align-self: flex-start;
+      }
+
+      #add-product-message {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="dashboard" hidden>
+      <header>
+        <h1>Dazzle Crystals | Admin</h1>
+        <button id="admin-logout">Logout</button>
+      </header>
+
+      <main>
+        <div class="welcome-card">
+          <h2>Welcome, Admin!</h2>
+          <p>Manage your Dazzle Crystals store.</p>
+        </div>
+
+        <section class="welcome-card" style="margin-top: 25px">
+          <h2>Product Inventory</h2>
+
+          <p>
+            Total Products:
+            <strong id="total-products">Loading...</strong>
+          </p>
+
+          <p id="products-message">Loading products...</p>
+
+          <div style="overflow-x: auto">
+            <table
+              id="products-table"
+              border="1"
+              cellpadding="12"
+              cellspacing="0"
+              style="width: 100%; border-collapse: collapse"
+              hidden
+            >
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Category</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="products-list"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section
+          id="edit-product-section"
+          class="welcome-card"
+          style="margin-top: 25px"
+          hidden
+        >
+          <h2>Edit Product</h2>
+
+          <form id="edit-product-form">
+            <label for="edit-name">Product Name</label>
+            <input type="text" id="edit-name" required />
+
+            <label for="edit-price">Price ($)</label>
+            <input type="number" id="edit-price" min="0" step="0.01" required />
+
+            <label for="edit-stock">Stock Quantity</label>
+            <input type="number" id="edit-stock" min="0" step="1" required />
+
+            <label for="edit-category">Category</label>
+            <input type="text" id="edit-category" required />
+
+            <label for="edit-description">Description</label>
+            <textarea id="edit-description" rows="4"></textarea>
+
+            <label for="edit-image">Change Product Image (Optional)</label>
+
+            <input
+              type="file"
+              id="edit-image"
+              accept="image/jpeg,image/png,image/webp"
+            />
+
+            <img
+              id="edit-image-preview"
+              alt="Product image preview"
+              hidden
+              style="
+                width: 160px;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+              "
+            />
+
+            <div style="margin-top: 20px">
+              <button type="button" id="cancel-edit">Cancel</button>
+
+              <button type="submit" id="save-product">Save Changes</button>
+            </div>
+          </form>
+        </section>
+
+        <section
+          id="add-product-section"
+          class="welcome-card"
+          style="margin-top: 25px"
+        >
+          <h2>Add New Product</h2>
+
+          <form id="add-product-form">
+            <label for="add-name">Product Name</label>
+            <input type="text" id="add-name" required />
+
+            <label for="add-price">Price ($)</label>
+            <input type="number" id="add-price" min="0" step="0.01" required />
+
+            <label for="add-stock">Stock Quantity</label>
+            <input type="number" id="add-stock" min="0" step="1" required />
+
+            <label for="add-category">Category</label>
+            <input type="text" id="add-category" required />
+
+            <label for="add-description">Description</label>
+            <textarea id="add-description" rows="4"></textarea>
+
+            <label for="add-image">Product Image</label>
+
+            <input
+              type="file"
+              id="add-image"
+              accept="image/jpeg,image/png,image/webp"
+              required
+            />
+
+            <img
+              id="add-image-preview"
+              alt="Selected product preview"
+              hidden
+              style="
+                width: 160px;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+              "
+            />
+
+            <button type="submit" id="add-product-button">Add Product</button>
+
+            <p id="add-product-message" role="status"></p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./js/admin-dashboard.js"></script>
+  </body>
+</html>
